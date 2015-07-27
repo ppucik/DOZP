@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Comdat.DOZP.OCR.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainWindowMax" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MainWindowLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MainWindowTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MainWindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="MainWindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OcrFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\DOZP\OCR</Value>
+    </Setting>
+    <Setting Name="SelectedCatalogueID" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AppWebsiteUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://ffas04.ff.cuni.cz</Value>
+    </Setting>
+    <Setting Name="FineReaderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\ABBYY FineReader 12/FineReader.exe</Value>
+    </Setting>
+    <Setting Name="ScanFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\DOZP\Scan</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

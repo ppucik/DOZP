@@ -1,0 +1,91 @@
+﻿<Window x:Class="Comdat.DOZP.App.ColorDialog"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:Comdat.DOZP.App"
+		Title="Barvy obrázku" 
+		Icon="/Comdat.DOZP.App;component/Images/Transform/Color16.png"
+		SizeToContent="WidthAndHeight"
+		ResizeMode="NoResize"
+		ShowInTaskbar="False"
+		WindowStartupLocation="CenterOwner" 
+		Loaded="Window_Loaded">
+	<Grid>
+		<Grid.Resources>
+			<Style TargetType="{x:Type Grid}">
+				<Setter Property="Margin" Value="10" />
+			</Style>
+			<Style TargetType="{x:Type GroupBox}">
+				<Setter Property="Margin" Value="10,5" />
+				<Setter Property="Padding" Value="3" />
+			</Style>
+			<Style TargetType="{x:Type Slider}">
+				<Setter Property="AutoToolTipPlacement" Value="TopLeft" />
+				<Setter Property="Cursor" Value="Hand" />
+				<Setter Property="TickPlacement" Value="BottomRight" />
+				<Setter Property="Width" Value="200" />
+			</Style>
+			<Style TargetType="{x:Type Button}">
+				<Setter Property="Width" Value="75" />
+				<Setter Property="Height" Value="25" />
+				<Setter Property="Margin" Value="5,0,0,0" />
+			</Style>
+		</Grid.Resources>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Column="0" Grid.Row="0" Margin="5,10,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Border.BitmapEffect>
+				<DropShadowBitmapEffect Opacity="0.5" ShadowDepth="0" />
+			</Border.BitmapEffect>
+			<Image x:Name="AdjustImage"
+				   HorizontalAlignment="Center"
+				   Width="200" Height="300"
+				   Stretch="Uniform"
+				   RenderOptions.EdgeMode="Aliased" 
+				   RenderOptions.BitmapScalingMode="HighQuality" />
+		</Border>
+		<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
+			<GroupBox Name="BrightnessGroupBox" Header="Jas">
+				<Slider x:Name="BrightnessSlider"
+						Minimum="-100" Value="0" Maximum="100" 
+						SmallChange="1" LargeChange="10" TickFrequency="10"
+						ValueChanged="BrightnessSlider_ValueChanged" />
+			</GroupBox>
+			<GroupBox Name="ContrastGroupBox" Header="Kontrast">
+				<Slider x:Name="ContrastSlider" 
+						Minimum="-100" Value="0" Maximum="100" 
+						SmallChange="1" LargeChange="10" TickFrequency="10"
+						ValueChanged="ContrastSlider_ValueChanged" />
+			</GroupBox>
+			<GroupBox Name="GammaGroupBox" Header="Gamma korekce">
+				<Slider x:Name="GammaSlider" 
+						Minimum="0.1" Value="1" Maximum="5" 
+						SmallChange="0.05" LargeChange="0.25" TickFrequency="0.25"
+						ValueChanged="GammaSlider_ValueChanged" />
+			</GroupBox>
+			<GroupBox Name="HueGroupBox" Header="Odstín">
+				<Slider x:Name="HueSlider" 
+						Minimum="-180" Value="0" Maximum="180" 
+						SmallChange="1" LargeChange="20" TickFrequency="20"
+						ValueChanged="HueSlider_ValueChanged" />
+			</GroupBox>
+			<GroupBox Name="SaturationGroupBox" Header="Saturace">
+				<Slider x:Name="SaturationSlider" 
+						Minimum="-100" Value="0" Maximum="100" 
+						SmallChange="1" LargeChange="10" TickFrequency="10"
+						ValueChanged="SaturationSlider_ValueChanged" />
+			</GroupBox>
+		</StackPanel>
+		<StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Name="OkButton" IsDefault="True" Content="OK" Click="OkButton_Click" />
+			<Button Name="CancelButton" IsCancel="True" Content="Storno" />
+		</StackPanel>
+	</Grid>
+</Window>
+

@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FF21F21-2E26-494F-9A43-2D4D3FE38140}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Comdat.DOZP.Web</RootNamespace>
+    <AssemblyName>Comdat.DOZP.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Altairis.Web.Security">
+      <HintPath>..\packages\Altairis.Web.Security.2.4.4.0\lib\net40\Altairis.Web.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Comdat.ZRIS.Zoom, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comdat.ZRIS.Zoom.1.0.0\Comdat.ZRIS.Zoom.dll</HintPath>
+    </Reference>
+    <Reference Include="Comdat.ZRIS.Zoom.Yaz, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comdat.ZRIS.Zoom.1.0.0\Comdat.ZRIS.Zoom.Yaz.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SecuritySwitch, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SecuritySwitch.4.4.0.0\lib\SecuritySwitch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Download.aspx" />
+    <Content Include="Account\DownloadOCR.aspx" />
+    <Content Include="Account\DownloadScan.aspx" />
+    <Content Include="Admin\Catalogue.aspx" />
+    <Content Include="Admin\Catalogues.aspx" />
+    <Content Include="Admin\EventLogs.aspx" />
+    <Content Include="Admin\Institution.aspx" />
+    <Content Include="Admin\Institutions.aspx" />
+    <Content Include="Admin\UserEdit.aspx" />
+    <Content Include="Admin\ChangePassword.aspx" />
+    <Content Include="Admin\Users.aspx" />
+    <Content Include="Catalogues\BookFind.aspx" />
+    <Content Include="Catalogues\BookInfo.aspx" />
+    <Content Include="Catalogues\BookList.aspx" />
+    <Content Include="Catalogues\FileDetail.aspx" />
+    <Content Include="Catalogues\FileInfo.aspx" />
+    <Content Include="Catalogues\FileList.aspx" />
+    <Content Include="Catalogues\FileStream.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Controls\CataloguesDropDownList.ascx" />
+    <Content Include="Controls\EnumDropDownList.ascx" />
+    <Content Include="Controls\InstitutionsDropDownList.ascx" />
+    <Content Include="Controls\MenuCalendar.ascx" />
+    <Content Include="Controls\MonthYearCalendar.ascx" />
+    <Content Include="Controls\PagerDropDownList.ascx" />
+    <Content Include="Controls\RolesDropDownList.ascx" />
+    <Content Include="Controls\UsersDropDownList.ascx" />
+    <Content Include="Help\ScanAppSetup.aspx" />
+    <Content Include="Help\ScanFrontCover.aspx" />
+    <Content Include="Help\ScanNewBook.aspx" />
+    <Content Include="Help\OcrInfo.aspx" />
+    <Content Include="Help\ScanHelp.aspx" />
+    <Content Include="Help\ScanInfo.aspx" />
+    <Content Include="Help\ScanSendToOcr.aspx" />
+    <Content Include="Help\ScanTableOfContents.aspx" />
+    <Content Include="Images\DozpApp.png" />
+    <Content Include="Images\DozpAppInstall.png" />
+    <Content Include="Images\DozpAppOptions.png" />
+    <Content Include="Images\DozpOcrApp.png" />
+    <Content Include="Images\DozpOcrInstall.png" />
+    <Content Include="Images\DozpScanApp.png" />
+    <Content Include="Images\FineReader.png" />
+    <Content Include="Images\FineReaderInstall.png" />
+    <Content Include="Images\Loading.gif" />
+    <Content Include="Images\SchemaOCR.jpg" />
+    <Content Include="Images\Search.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="Images\Favicon.ico" />
+    <Content Include="Images\Logo.png" />
+    <Content Include="Service.svc" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Statistics\UserSum.aspx" />
+    <Content Include="Statistics\Overview.aspx" />
+    <Content Include="Statistics\OcrSum.aspx" />
+    <Content Include="Statistics\ScanSum.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\DownloadOCR.aspx.cs">
+      <DependentUpon>DownloadOCR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\DownloadOCR.aspx.designer.cs">
+      <DependentUpon>DownloadOCR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\DownloadScan.aspx.cs">
+      <DependentUpon>DownloadScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\DownloadScan.aspx.designer.cs">
+      <DependentUpon>DownloadScan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Catalogue.aspx.cs">
+      <DependentUpon>Catalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Catalogue.aspx.designer.cs">
+      <DependentUpon>Catalogue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Catalogues.aspx.cs">
+      <DependentUpon>Catalogues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Catalogues.aspx.designer.cs">
+      <DependentUpon>Catalogues.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EventLogs.aspx.cs">
+      <DependentUpon>EventLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EventLogs.aspx.designer.cs">
+      <DependentUpon>EventLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Institution.aspx.cs">
+      <DependentUpon>Institution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Institution.aspx.designer.cs">
+      <DependentUpon>Institution.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Institutions.aspx.cs">
+      <DependentUpon>Institutions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Institutions.aspx.designer.cs">
+      <DependentUpon>Institutions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserEdit.aspx.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserEdit.aspx.designer.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\MembershipResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MembershipResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\RolesResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Util\Extensions.cs" />
+    <Compile Include="App_Util\ManagementSection.cs" />
+    <Compile Include="Catalogues\BookFind.aspx.cs">
+      <DependentUpon>BookFind.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\BookFind.aspx.designer.cs">
+      <DependentUpon>BookFind.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\BookInfo.aspx.cs">
+      <DependentUpon>BookInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\BookInfo.aspx.designer.cs">
+      <DependentUpon>BookInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\BookList.aspx.cs">
+      <DependentUpon>BookList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\BookList.aspx.designer.cs">
+      <DependentUpon>BookList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\FileDetail.aspx.cs">
+      <DependentUpon>FileDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\FileDetail.aspx.designer.cs">
+      <DependentUpon>FileDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\FileInfo.aspx.cs">
+      <DependentUpon>FileInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\FileInfo.aspx.designer.cs">
+      <DependentUpon>FileInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\FileList.aspx.cs">
+      <DependentUpon>FileList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\FileList.aspx.designer.cs">
+      <DependentUpon>FileList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogues\FileStream.aspx.cs">
+      <DependentUpon>FileStream.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogues\FileStream.aspx.designer.cs">
+      <DependentUpon>FileStream.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CataloguesDropDownList.ascx.cs">
+      <DependentUpon>CataloguesDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CataloguesDropDownList.ascx.designer.cs">
+      <DependentUpon>CataloguesDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EnumDropDownList.ascx.cs">
+      <DependentUpon>EnumDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\EnumDropDownList.ascx.designer.cs">
+      <DependentUpon>EnumDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstitutionsDropDownList.ascx.cs">
+      <DependentUpon>InstitutionsDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\InstitutionsDropDownList.ascx.designer.cs">
+      <DependentUpon>InstitutionsDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuCalendar.ascx.cs">
+      <DependentUpon>MenuCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuCalendar.ascx.designer.cs">
+      <DependentUpon>MenuCalendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MonthYearCalendar.ascx.cs">
+      <DependentUpon>MonthYearCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\MonthYearCalendar.ascx.designer.cs">
+      <DependentUpon>MonthYearCalendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagerDropDownList.ascx.cs">
+      <DependentUpon>PagerDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PagerDropDownList.ascx.designer.cs">
+      <DependentUpon>PagerDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RolesDropDownList.ascx.cs">
+      <DependentUpon>RolesDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\RolesDropDownList.ascx.designer.cs">
+      <DependentUpon>RolesDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UsersDropDownList.ascx.cs">
+      <DependentUpon>UsersDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UsersDropDownList.ascx.designer.cs">
+      <DependentUpon>UsersDropDownList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanAppSetup.aspx.cs">
+      <DependentUpon>ScanAppSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanAppSetup.aspx.designer.cs">
+      <DependentUpon>ScanAppSetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanFrontCover.aspx.cs">
+      <DependentUpon>ScanFrontCover.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanFrontCover.aspx.designer.cs">
+      <DependentUpon>ScanFrontCover.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanNewBook.aspx.cs">
+      <DependentUpon>ScanNewBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanNewBook.aspx.designer.cs">
+      <DependentUpon>ScanNewBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\OcrInfo.aspx.cs">
+      <DependentUpon>OcrInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\OcrInfo.aspx.designer.cs">
+      <DependentUpon>OcrInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanHelp.aspx.cs">
+      <DependentUpon>ScanHelp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanHelp.aspx.designer.cs">
+      <DependentUpon>ScanHelp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanInfo.aspx.cs">
+      <DependentUpon>ScanInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanInfo.aspx.designer.cs">
+      <DependentUpon>ScanInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanSendToOcr.aspx.cs">
+      <DependentUpon>ScanSendToOcr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanSendToOcr.aspx.designer.cs">
+      <DependentUpon>ScanSendToOcr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ScanTableOfContents.aspx.cs">
+      <DependentUpon>ScanTableOfContents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Help\ScanTableOfContents.aspx.designer.cs">
+      <DependentUpon>ScanTableOfContents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DOZP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOZP.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\UserSum.aspx.cs">
+      <DependentUpon>UserSum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\UserSum.aspx.designer.cs">
+      <DependentUpon>UserSum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\Overview.aspx.cs">
+      <DependentUpon>Overview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\Overview.aspx.designer.cs">
+      <DependentUpon>Overview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\OcrSum.aspx.cs">
+      <DependentUpon>OcrSum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\OcrSum.aspx.designer.cs">
+      <DependentUpon>OcrSum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\ScanSum.aspx.cs">
+      <DependentUpon>ScanSum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\ScanSum.aspx.designer.cs">
+      <DependentUpon>ScanSum.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comdat.DOZP.Core\Comdat.DOZP.Core.csproj">
+      <Project>{C137E1E8-2E20-4956-9987-01B38DD2982E}</Project>
+      <Name>Comdat.DOZP.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comdat.DOZP.Data\Comdat.DOZP.Data.csproj">
+      <Project>{A93E9A8B-156D-4D15-BDE6-E8F1C3A16DE1}</Project>
+      <Name>Comdat.DOZP.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comdat.DOZP.Service\Comdat.DOZP.Services.csproj">
+      <Project>{609E1775-816C-4A49-8945-937D5AD953EF}</Project>
+      <Name>Comdat.DOZP.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\DOZP.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DOZP.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Default\Default.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Statistics\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Catalogues\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Download\OCR\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Download\Scan\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Download\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\RolesResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RolesResource.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Download\App\Web.config" />
+    <None Include="SecuritySwitch-v4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MembershipResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MembershipResource.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>12623</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:12623/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

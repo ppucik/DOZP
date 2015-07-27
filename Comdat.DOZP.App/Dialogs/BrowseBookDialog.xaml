@@ -1,0 +1,93 @@
+﻿<Window x:Class="Comdat.DOZP.App.BrowseBookDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Comdat.DOZP.App"
+        Title="Zamístnuté publikace" 
+        Icon="/Comdat.DOZP.App;component/Images/Home/NewBook16.png"
+        Height="400" Width="600"        
+        ResizeMode="NoResize"
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterOwner" 
+        Loaded="Window_Loaded">        
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Margin" Value="10" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Margin" Value="0,0,0,0" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Margin" Value="0,0,0,0" />
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="75" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Margin" Value="5,0,0,0" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="CatalogueLabel" Grid.Column="0" Grid.Row="0" Content="Vybraný katalog:" />
+        <ComboBox x:Name="CatalogueComboBox" Grid.Column="1" Grid.Row="0" 
+                  DisplayMemberPath="Name" SelectedValuePath="CatalogueID"
+                  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=SelectedCatalogueID, Mode=TwoWay}" 
+                  SelectionChanged="CatalogueComboBox_SelectionChanged" />
+
+        <ListView x:Name="ContentsListView" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,10,0,5"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionMode="Single"
+                  SelectionChanged="ContentsListView_SelectionChanged" 
+                  MouseDoubleClick="ContentsListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="SysNo" Width="105">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Comdat.DOZP.Scan;component/Images/Home/DiscardBook16.png" Margin="0,0,5,0" />
+                                    <TextBlock Text="{Binding Book.SysNo}" TextAlignment="Left" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="90" Header="Autor" DisplayMemberBinding="{Binding Book.Author}" />
+                    <GridViewColumn Width="200" Header="Název" DisplayMemberBinding="{Binding Book.Title}" />
+                    <GridViewColumn Width="50" Header="Rok" DisplayMemberBinding="{Binding Book.Year}" />
+                    <!--<GridViewColumn Width="100" Header="Typ" DisplayMemberBinding="{Binding PartOfBook, Converter={StaticResource PartOfBookEnumItemsSource}}" />-->
+                    <GridViewColumn Width="100" Header="Díl, svazek" DisplayMemberBinding="{Binding Book.Volume}" />
+                    <GridViewColumn Width="100" Header="Změněno" DisplayMemberBinding="{Binding Modified, StringFormat={}{0:d.M.yyyy h:mm}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Label x:Name="CommentLabel" Grid.Column="0" Grid.Row="2" Content="Komentář:" />
+        <TextBox x:Name="CommentTextBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" 
+                 Height="60"
+                 IsReadOnly="True"
+                 Margin="0,0,0,10"
+                 VerticalScrollBarVisibility="Auto" />
+        
+        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Name="ScanButton" IsDefault="True" Click="ScanButton_Click">Skenovat</Button>
+            <Button Name="DeleteButton" IsDefault="True" Click="DeleteButton_Click">Odstranit</Button>
+            <Button Name="NoOcrButton" IsDefault="True" Click="NoOcrButton_Click">Zrušit OCR</Button>
+            <Button Name="CancelButton" IsCancel="True">Storno</Button>
+        </StackPanel>
+    </Grid>
+</Window>

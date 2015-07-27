@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>publish\</PublishUrlHistory>
+    <InstallUrlHistory>http://ffas04.ff.cuni.cz/download/scan/|http://http:/ffas04.ff.cuni.cz/download/scan/|http://www.zris.cz/download/scan/|http://www.zris.cz/toc/download/dozp/|http://www.zris.cz/download/dozp/</InstallUrlHistory>
+    <SupportUrlHistory>http://ffas04.ff.cuni.cz/download|http://ffas04.ff.cuni.cz/Download|http://www.zris.cz/toc|http://www.zris.cz/dozp</SupportUrlHistory>
+    <UpdateUrlHistory>http://ffas04.ff.cuni.cz/Download/Scan/</UpdateUrlHistory>
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+</Project>

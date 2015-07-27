@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Core" />
+  <xs:complexType name="DozpServiceFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DozpServiceFault" nillable="true" type="tns:DozpServiceFault" />
+  <xs:complexType name="SearchRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Author" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Barcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="ISBN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SysNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Year" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchRequest" nillable="true" type="tns:SearchRequest" />
+  <xs:complexType name="ObalkyKnihRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bibinfo" nillable="true" type="tns:ObalkyKnihBibInfo" />
+      <xs:element minOccurs="0" name="permalink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="zserverUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObalkyKnihRequest" nillable="true" type="tns:ObalkyKnihRequest" />
+  <xs:complexType name="ObalkyKnihBibInfo">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="authors" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isbn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="issn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nbn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="oclc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sysno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="year" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObalkyKnihBibInfo" nillable="true" type="tns:ObalkyKnihBibInfo" />
+  <xs:complexType name="ObalkyKnihResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="backlink_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="bibinfo" nillable="true" type="tns:ObalkyKnihBibInfo" />
+      <xs:element minOccurs="0" name="bookid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="cover_icon_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="cover_image" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="cover_medium_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="cover_thumbnail_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ean" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nbn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="oclc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rating_count" type="xs:int" />
+      <xs:element minOccurs="0" name="rating_sum" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="reviews" nillable="true" type="q2:ArrayOfanyType" />
+      <xs:element minOccurs="0" name="toc_pdf_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="toc_text_url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="toc_thumbnail_url" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObalkyKnihResponse" nillable="true" type="tns:ObalkyKnihResponse" />
+  <xs:complexType name="ScanFileRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Computer" nillable="true" type="xs:string" />
+      <xs:element name="ScanFileID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScanFileRequest" nillable="true" type="tns:ScanFileRequest" />
+  <xs:complexType name="ScanImageResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+      <xs:element name="ScanFileID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScanImageResponse" nillable="true" type="tns:ScanImageResponse" />
+  <xs:complexType name="ScanImageRequest">
+    <xs:sequence>
+      <xs:element name="BookID" type="xs:int" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Computer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ObalkyKnihCZ" type="xs:boolean" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Core" minOccurs="0" name="PartOfBook" type="q3:PartOfBook" />
+      <xs:element name="ScanFileID" type="xs:int" />
+      <xs:element minOccurs="0" name="UseOCR" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScanImageRequest" nillable="true" type="tns:ScanImageRequest" />
+  <xs:complexType name="ScanFileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+      <xs:element name="ScanFileID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScanFileResponse" nillable="true" type="tns:ScanFileResponse" />
+  <xs:complexType name="OcrFileRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Computer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OcrText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PdfFile" nillable="true" type="xs:base64Binary" />
+      <xs:element name="ScanFileID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OcrFileRequest" nillable="true" type="tns:OcrFileRequest" />
+  <xs:complexType name="OcrFileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+      <xs:element name="ScanFileID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OcrFileResponse" nillable="true" type="tns:OcrFileResponse" />
+</xs:schema>

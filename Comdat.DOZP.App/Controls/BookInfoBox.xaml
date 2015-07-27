@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Comdat.DOZP.App.BookInfoBox"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 mc:Ignorable="d" d:DesignHeight="512" d:DesignWidth="300"
+			 BorderThickness="1">
+
+	<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+		<Grid x:Name="BookInfoGrid" Background="Silver">
+			<Grid.Resources>
+				<Style TargetType="{x:Type Grid}">
+					<Setter Property="Margin" Value="0" />
+				</Style>
+				<Style TargetType="{x:Type Label}">
+					<Setter Property="FontSize" Value="13"/>
+					<Setter Property="Margin" Value="5,0" />
+				</Style>
+				<Style TargetType="{x:Type TextBox}">
+					<Setter Property="Background" Value="Gainsboro" />
+					<Setter Property="FontSize" Value="13"/>
+					<Setter Property="Margin" Value="10,0,10,0" />
+				</Style>
+			</Grid.Resources>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="60" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="15" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Label x:Name="SysnoLabel" Grid.Row="0" Content="SYSNO:" />
+			<TextBox x:Name="SysnoTextBox"  Grid.Row="1" IsReadOnly="True" FontSize="14" FontWeight="DemiBold" Foreground="DarkBlue" />
+			<Label x:Name="AuthorLabel" Grid.Row="2" Content="Autor:" />
+			<TextBox x:Name="AuthorTextBox"  Grid.Row="3" IsReadOnly="True" />
+			<Label x:Name="TitleLabel" Grid.Row="4" Content="Název:" />
+			<TextBox x:Name="TitleTextBox"  Grid.Row="5" IsReadOnly="True" MinLines="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  />
+			<Label x:Name="YearLabel" Grid.Row="6" Content="Rok:" />
+			<TextBox x:Name="YearTextBox"  Grid.Row="7" IsReadOnly="True" />
+			<Label x:Name="VolumeLabel" Grid.Row="8" Content="Díl, svazek:" />
+			<TextBox x:Name="VolumeTextBox"  Grid.Row="9" IsReadOnly="True" />
+			<Label x:Name="IsbnLabel" Grid.Row="10" Content="ISBN:" />
+			<TextBox x:Name="IsbnTextBox"  Grid.Row="11" IsReadOnly="True" />
+			<Label x:Name="NbnLabel" Grid.Row="12" Content="ČNB:" />
+			<TextBox x:Name="NbnTextBox" Grid.Row="13" IsReadOnly="True" />
+			<Label x:Name="OclcLabel" Grid.Row="14" Content="OCLC:" />
+			<TextBox x:Name="OclcTextBox"  Grid.Row="15" IsReadOnly="True" />
+			<Label x:Name="BarcodeLabel" Grid.Row="16" Content="Čárový kód:" />
+			<TextBox x:Name="BarcodeTextBox"  Grid.Row="17" IsReadOnly="True" />
+		</Grid>
+	</ScrollViewer>
+</UserControl>

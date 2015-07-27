@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuCalendar.ascx.cs" Inherits="Comdat.DOZP.Web.Controls.MenuCalendar" %>
+<asp:Calendar ID="Calendar" runat="server" SkinID="Calendar" OnSelectionChanged="Calendar_SelectionChanged"></asp:Calendar>

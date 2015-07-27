@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://ffas04.ff.cuni.cz//2015/01" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ffas04.ff.cuni.cz//2015/01" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ffas04.ff.cuni.cz//2015/01/Imports">
+      <xsd:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd0" namespace="http://ffas04.ff.cuni.cz//2015/01" />
+      <xsd:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" />
+      <xsd:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Core" />
+      <xsd:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="DozpService_ServiceInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceInfo" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_ServiceInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_Authenticate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_Authenticate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_Authenticate_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q1:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetInstitution_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitution" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetInstitution_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitutionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetInstitution_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q2:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBook" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchBook_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q3:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchObalkyKnihCZ_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchObalkyKnihCZ" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchObalkyKnihCZ_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchObalkyKnihCZResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SearchObalkyKnihCZ_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q4:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBook" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBook_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q5:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBooks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooks" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBooks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetBooks_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q6:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBook" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveBook_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q7:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBook" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteBook_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q8:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetScanFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScanFiles" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetScanFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScanFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetScanFiles_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q9:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetScanImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScanImage" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetScanImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScanImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetContentsToOCR_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContentsToOCR" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetContentsToOCR_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContentsToOCRResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_GetContentsToOCR_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q10:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveScanImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveScanImage" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveScanImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveScanImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_SaveScanImage_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q11:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckOutContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOutContents" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckOutContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOutContentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckOutContents_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q12:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckInContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckInContents" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckInContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckInContentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CheckInContents_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q13:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DiscardContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:DiscardContents" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DiscardContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DiscardContentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DiscardContents_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q14:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CancelOcrContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelOcrContents" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CancelOcrContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelOcrContentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_CancelOcrContents_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q15:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_UndoContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:UndoContents" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_UndoContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UndoContentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_UndoContents_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q16:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteScanFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScanFile" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteScanFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScanFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_DeleteScanFile_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q17:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_LogError_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogError" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_LogError_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogErrorResponse" />
+  </wsdl:message>
+  <wsdl:message name="DozpService_LogError_DozpServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Services" name="detail" element="q18:DozpServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="DozpService">
+    <wsdl:operation name="ServiceInfo">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/ServiceInfo" message="tns:DozpService_ServiceInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/ServiceInfoResponse" message="tns:DozpService_ServiceInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Authenticate">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/Authenticate" message="tns:DozpService_Authenticate_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/AuthenticateResponse" message="tns:DozpService_Authenticate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/AuthenticateDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_Authenticate_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitution">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetInstitution" message="tns:DozpService_GetInstitution_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetInstitutionResponse" message="tns:DozpService_GetInstitution_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetInstitutionDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_GetInstitution_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBook">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchBook" message="tns:DozpService_SearchBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchBookResponse" message="tns:DozpService_SearchBook_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchBookDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_SearchBook_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchObalkyKnihCZ">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchObalkyKnihCZ" message="tns:DozpService_SearchObalkyKnihCZ_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchObalkyKnihCZResponse" message="tns:DozpService_SearchObalkyKnihCZ_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SearchObalkyKnihCZDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_SearchObalkyKnihCZ_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBook">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBook" message="tns:DozpService_GetBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBookResponse" message="tns:DozpService_GetBook_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBookDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_GetBook_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBooks">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBooks" message="tns:DozpService_GetBooks_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBooksResponse" message="tns:DozpService_GetBooks_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetBooksDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_GetBooks_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBook">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveBook" message="tns:DozpService_SaveBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveBookResponse" message="tns:DozpService_SaveBook_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveBookDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_SaveBook_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteBook" message="tns:DozpService_DeleteBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteBookResponse" message="tns:DozpService_DeleteBook_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteBookDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_DeleteBook_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScanFiles">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetScanFiles" message="tns:DozpService_GetScanFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetScanFilesResponse" message="tns:DozpService_GetScanFiles_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetScanFilesDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_GetScanFiles_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScanImage">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetScanImage" message="tns:DozpService_GetScanImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetScanImageResponse" message="tns:DozpService_GetScanImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentsToOCR">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetContentsToOCR" message="tns:DozpService_GetContentsToOCR_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetContentsToOCRResponse" message="tns:DozpService_GetContentsToOCR_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/GetContentsToOCRDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_GetContentsToOCR_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveScanImage">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveScanImage" message="tns:DozpService_SaveScanImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveScanImageResponse" message="tns:DozpService_SaveScanImage_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/SaveScanImageDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_SaveScanImage_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckOutContents">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckOutContents" message="tns:DozpService_CheckOutContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckOutContentsResponse" message="tns:DozpService_CheckOutContents_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckOutContentsDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_CheckOutContents_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckInContents">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckInContents" message="tns:DozpService_CheckInContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckInContentsResponse" message="tns:DozpService_CheckInContents_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CheckInContentsDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_CheckInContents_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DiscardContents">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DiscardContents" message="tns:DozpService_DiscardContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DiscardContentsResponse" message="tns:DozpService_DiscardContents_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DiscardContentsDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_DiscardContents_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelOcrContents">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CancelOcrContents" message="tns:DozpService_CancelOcrContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CancelOcrContentsResponse" message="tns:DozpService_CancelOcrContents_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/CancelOcrContentsDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_CancelOcrContents_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UndoContents">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/UndoContents" message="tns:DozpService_UndoContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/UndoContentsResponse" message="tns:DozpService_UndoContents_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/UndoContentsDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_UndoContents_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteScanFile">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteScanFile" message="tns:DozpService_DeleteScanFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteScanFileResponse" message="tns:DozpService_DeleteScanFile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/DeleteScanFileDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_DeleteScanFile_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogError">
+      <wsdl:input wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/LogError" message="tns:DozpService_LogError_InputMessage" />
+      <wsdl:output wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/LogErrorResponse" message="tns:DozpService_LogError_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://ffas04.ff.cuni.cz//2015/01/DozpService/LogErrorDozpServiceFaultFault" name="DozpServiceFaultFault" message="tns:DozpService_LogError_DozpServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

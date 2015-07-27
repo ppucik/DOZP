@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Core" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Comdat.DOZP.Core" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:12623/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstitutionID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telephone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="Institution">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlephUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Catalogues" nillable="true" type="tns:ArrayOfCatalogue" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Homepage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstitutionID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sigla" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telephone" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Institution" nillable="true" type="tns:Institution" />
+  <xs:complexType name="ArrayOfCatalogue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Catalogue" nillable="true" type="tns:Catalogue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCatalogue" nillable="true" type="tns:ArrayOfCatalogue" />
+  <xs:complexType name="Catalogue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="DatabaseName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZServerPort" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZServerUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Catalogue" nillable="true" type="tns:Catalogue" />
+  <xs:complexType name="Report">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Barcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ISBN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Size" type="xs:int" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SysNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="XmlData" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Report" nillable="true" type="tns:Report" />
+  <xs:complexType name="Book">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Author" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Barcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookID" type="xs:int" />
+      <xs:element minOccurs="0" name="Catalogue" nillable="true" type="tns:Catalogue" />
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Created" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FileIndex" type="xs:short" />
+      <xs:element minOccurs="0" name="ISBN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ISSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NBN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OCLC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScanFiles" nillable="true" type="tns:ArrayOfScanFile" />
+      <xs:element minOccurs="0" name="SysNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Year" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Book" nillable="true" type="tns:Book" />
+  <xs:complexType name="ArrayOfScanFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ScanFile" nillable="true" type="tns:ScanFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfScanFile" nillable="true" type="tns:ArrayOfScanFile" />
+  <xs:complexType name="ScanFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Book" nillable="true" type="tns:Book" />
+      <xs:element minOccurs="0" name="BookID" type="xs:int" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Created" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageChanged" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Modified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ObalkyKnihUrl" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OcrText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OcrTime" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="PageCount" type="xs:short" />
+      <xs:element minOccurs="0" name="PartOfBook" type="tns:PartOfBook" />
+      <xs:element minOccurs="0" name="ScanFileID" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="tns:StatusCode" />
+      <xs:element minOccurs="0" name="UseOCR" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ScanFile" nillable="true" type="tns:ScanFile" />
+  <xs:simpleType name="PartOfBook">
+    <xs:annotation>
+      <xs:appinfo>
+        <ActualType Name="short" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FrontCover">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TableOfContents">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PartOfBook" nillable="true" type="tns:PartOfBook" />
+  <xs:simpleType name="StatusCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotStarted" />
+      <xs:enumeration value="Scanned" />
+      <xs:enumeration value="InProgress" />
+      <xs:enumeration value="Discarded" />
+      <xs:enumeration value="Complete" />
+      <xs:enumeration value="Exported" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StatusCode" nillable="true" type="tns:StatusCode" />
+  <xs:complexType name="BookFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Barcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookID" type="xs:int" />
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="ISBN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modified" nillable="true" type="tns:DateRange" />
+      <xs:element minOccurs="0" name="PartOfBook" nillable="true" type="tns:PartOfBook" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:StatusCode" />
+      <xs:element minOccurs="0" name="SysNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UseOCR" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BookFilter" nillable="true" type="tns:BookFilter" />
+  <xs:complexType name="DateRange">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="tns:DateRange.DateType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DateRange" nillable="true" type="tns:DateRange" />
+  <xs:simpleType name="DateRange.DateType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Created" />
+      <xs:enumeration value="Modified" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DateRange.DateType" nillable="true" type="tns:DateRange.DateType" />
+  <xs:complexType name="ArrayOfBook">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Book" nillable="true" type="tns:Book" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBook" nillable="true" type="tns:ArrayOfBook" />
+  <xs:complexType name="ScanFileFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookID" type="xs:int" />
+      <xs:element minOccurs="0" name="CatalogueID" type="xs:int" />
+      <xs:element minOccurs="0" name="Modified" nillable="true" type="tns:DateRange" />
+      <xs:element minOccurs="0" name="PartOfBook" nillable="true" type="tns:PartOfBook" />
+      <xs:element minOccurs="0" name="ScanFileID" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:StatusCode" />
+      <xs:element minOccurs="0" name="SysNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UseOCR" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScanFileFilter" nillable="true" type="tns:ScanFileFilter" />
+</xs:schema>

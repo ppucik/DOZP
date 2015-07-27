@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Comdat.DOZP.Services.DozpService" Factory="System.ServiceModel.Activation.ServiceHostFactory" %>

@@ -1,0 +1,142 @@
+﻿<Window x:Class="Comdat.DOZP.Scan.OptionsDialog"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:Comdat.DOZP.Scan"
+		Title="Nastavení" 
+		Icon="/Comdat.DOZP.Scan;component/Images/File/Options16.png"       
+        SizeToContent="Height" Width="450"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"      
+		WindowStartupLocation="CenterOwner" 
+		Loaded="Window_Loaded">
+	<Grid>
+		<Grid.Resources>
+			<Style TargetType="{x:Type Grid}">
+				<Setter Property="Margin" Value="5" />
+			</Style>            
+			<Style TargetType="{x:Type ComboBox}">
+				<Setter Property="Margin" Value="0,0,0,5" />
+			</Style>
+			<Style TargetType="{x:Type CheckBox}">
+				<Setter Property="Margin" Value="10,5" />
+			</Style>
+			<Style TargetType="{x:Type TextBox}">
+				<Setter Property="Margin" Value="0,0,0,5" />
+			</Style>
+			<Style TargetType="{x:Type Button}">
+				<Setter Property="Width" Value="75" />
+				<Setter Property="Height" Value="25" />
+				<Setter Property="Margin" Value="5,10,0,0" />
+			</Style>
+		</Grid.Resources>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<TabControl x:Name="OptionsTabControl" Grid.Column="0" Grid.Row="0" Height="310" Margin="0">
+			<TabItem x:Name="GeneralTabItem" Header="Obecné">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<Label x:Name="CatalogueLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" 
+						   Content="Připojený katalog:" />
+					<ComboBox x:Name="CatalogueComboBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+							  DisplayMemberPath="Name" SelectedValuePath="CatalogueID"
+							  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=SelectedCatalogueID, Mode=TwoWay}" />
+					<Label x:Name="ScanFolderPathLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" 
+						   Content="Složka pro ukládání naskenovaných souborů:"/>
+					<TextBox x:Name="ScanFolderPathTextBox" Grid.Column="0" Grid.Row="3"
+							 Text="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanFolderPath, Mode=TwoWay}" Margin="0,0,0,5" />
+					<Button x:Name="ScanFolderButton" Grid.Column="1" Grid.Row="3" Margin="5,0,0,5" Height="22" 
+							Content="Vybrat..." Click="ScanFolderButton_Click" />                   
+					<CheckBox x:Name="CheckObalkyKnihCZCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=CheckObalkyKnihCZ, Mode=TwoWay}" 
+							  Content="Kontrolovat obálky na webu ObalkyKnih.cz" />
+					<CheckBox x:Name="ImportObalkyKnihCZCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ImportObalkyKnihCZ, Mode=TwoWay}" 
+							  Content="Importovat obálky na web ObalkyKnih.cz" />
+					<CheckBox x:Name="AppAlwaysOnTopCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AppAlwaysOnTop, Mode=TwoWay}" 
+							  Content="Zobrazovat okno aplikace vždy navrchu" />
+					<CheckBox x:Name="AppLoggingCheckBox" Grid.Column="0" Grid.Row="8"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AppLogging, Mode=TwoWay}" 
+							  Content="Zapisovat zprávy a chyby do log souboru" />
+					<Button x:Name="AppLoggingButton" Grid.Column="1" Grid.Row="8" Margin="5,0,0,5" Height="22" 
+							Content="Zobrazit..." Click="AppLoggingButton_Click" />
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="ScanningTabItem" Header="Skenování">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<Label x:Name="ScannerSourceNameLabel" Grid.Column="0" Grid.Row="0" 
+						   Content="Výběr skeneru:" />
+					<ComboBox x:Name="ScannerSourceNameComboBox" Grid.Column="0" Grid.Row="1" 
+							  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerSourceName, Mode=TwoWay}" />
+					<CheckBox x:Name="ShowTwainUICheckBox" Grid.Column="0" Grid.Row="2"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerShowTwainUI, Mode=TwoWay}" 
+							  Content="Zobrazovat uživatelské rozhraní skeneru" />
+					<CheckBox x:Name="AutomaticDeskewCheckBox" Grid.Column="0" Grid.Row="3"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticDeskew, Mode=TwoWay}" 
+							  Content="Automatické vyrovnání naskenovaného obrázku" />
+					<CheckBox x:Name="AutomaticBorderDetectionCheckBox" Grid.Column="0" Grid.Row="4"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticBorderDetection, Mode=TwoWay}" 
+							  Content="Automatická detekce hranic naskenovaného obrázku" />
+					<CheckBox x:Name="AutomaticRotateCheckBox" Grid.Column="0" Grid.Row="5"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticRotate, Mode=TwoWay}" 
+							  Content="Automatická rotace naskenovaného obrázku" />
+					<CheckBox x:Name="AutoRotateEvenPageCheckBox" Grid.Column="0" Grid.Row="6"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AutoRotateEvenPage, Mode=TwoWay}" 
+							  Content="Otáčet sudé stránky (pokuď nelze použít automatickou rotaci)" />
+					<CheckBox x:Name="AutomaticColorCorectionCheckBox" Grid.Column="0" Grid.Row="7"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AutomaticColorCorection, Mode=TwoWay}" 
+							  Content="Automatická korekce barev naskenovaného obrázku" />
+					<CheckBox x:Name="AdvancedColorCorectionCheckBox" Grid.Column="0" Grid.Row="8"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AdvancedColorCorection, Mode=TwoWay}" 
+							  Content="Pokročilé funkce pro korekci barev" />
+					<CheckBox x:Name="ScannerSaveToFileCheckBox" Grid.Column="0" Grid.Row="98"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerSaveToFile, Mode=TwoWay}" 
+							  Content="Ukládat naskenovaný obrázek vždy na disk" />
+				</Grid>
+			</TabItem>
+		</TabControl>
+		
+		<StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Name="OkButton" IsDefault="True" Click="OkButton_Click">OK</Button>
+			<Button Name="CancelButton" IsCancel="True">Storno</Button>
+		</StackPanel>
+	</Grid>
+</Window>

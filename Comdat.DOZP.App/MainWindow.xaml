@@ -1,0 +1,665 @@
+﻿<ribbon:RibbonWindow x:Name="RibbonWindow" x:Class="Comdat.DOZP.App.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:Comdat.DOZP.App"
+	xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" 
+	xmlns:icis="clr-namespace:ImageComponents.WPF.Imaging;assembly=ImageComponents.WPF.ImgScan" 
+	xmlns:icie="clr-namespace:ImageComponents.WPF.Imaging;assembly=ImageComponents.WPF.ImgEdit" 
+	xmlns:ictn="clr-namespace:ImageComponents.WPF.Imaging;assembly=ImageComponents.WPF.ImgThumbnails" 
+	xmlns:gif="http://wpfanimatedgif.codeplex.com"
+	Icon="Comdat.DOZP.Scan.ico" Title="DOZP-Skenování"
+	MinWidth="925" MinHeight="600" ResizeMode="CanResizeWithGrip"
+	Left ="{Binding Source={x:Static local:Properties.Settings.Default}, Path=MainWindowLeft, Mode=TwoWay}"
+	Top ="{Binding Source={x:Static local:Properties.Settings.Default}, Path=MainWindowTop, Mode=TwoWay}"
+	Width="{Binding Source={x:Static local:Properties.Settings.Default}, Path=MainWindowWidth, Mode=TwoWay}"
+	Height="{Binding Source={x:Static local:Properties.Settings.Default}, Path=MainWindowHeight, Mode=TwoWay}" 
+	Loaded="RibbonWindow_Loaded" ContentRendered="RibbonWindow_ContentRendered" Closed="RibbonWindow_Closed" 
+	DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeChanged="RibbonWindow_SizeChanged" Closing="RibbonWindow_Closing" StateChanged="RibbonWindow_StateChanged"
+	local:HelpProvider.HelpString="ScanHelp.aspx">
+
+	<Window.Resources>
+		<Storyboard x:Key="sbWorkProgressLoad" x:Name="sbWorkProgressLoad">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pbWorkProgress" Storyboard.TargetProperty="(UIElement.Opacity)">
+				<EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="sbWorkProgressClose" x:Name="sbWorkProgressClose">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pbWorkProgress" Storyboard.TargetProperty="(UIElement.Opacity)">
+				<EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Window.Resources>
+
+	<!--<Window.CommandBindings>
+		<CommandBinding Command='ApplicationCommands.Help' Executed='RibbonWindow_Help_Executed' />
+	</Window.CommandBindings>-->
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<!--Grid resources-->
+		<Grid.Resources>
+			<Style x:Key="RibbonMenuItemCheckable" TargetType="{x:Type ribbon:RibbonMenuItem}">
+				<Setter Property="IsCheckable" Value="True"/>
+				<Setter Property="FontSize" Value="13"/>
+				<Style.Triggers>
+					<Trigger Property="IsChecked" Value="True">
+						<Setter Property="FontWeight" Value="DemiBold" />
+						<Setter Property="Foreground" Value="Black" />
+					</Trigger>
+					<Trigger Property="IsChecked" Value="False">
+						<Setter Property="FontWeight" Value="Normal" />
+						<Setter Property="Foreground" Value="Gray" />
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+			<Style x:Key="ThumbnailsBorder" TargetType="{x:Type Border}">
+				<Setter Property="BorderThickness" Value="1" />
+				<Setter Property="BorderBrush" Value="LightGray" />
+				<Setter Property="Background" Value="SkyBlue" />
+				<Setter Property="HorizontalAlignment" Value="Stretch" />
+				<Setter Property="VerticalAlignment" Value="Stretch" />
+			</Style>
+			<Style x:Key="ThumbnailsTextBlock" TargetType="{x:Type TextBlock}">
+				<Setter Property="Padding" Value="5,0" />
+				<Setter Property="FontSize" Value="14" />
+				<Setter Property="FontWeight" Value="DemiBold" />
+				<Setter Property="Foreground" Value="White" />
+				<Setter Property="HorizontalAlignment" Value="Center" />
+				<Setter Property="VerticalAlignment" Value="Center" />
+			</Style>
+		</Grid.Resources>
+		<!--Ribbon menu-->
+		<ribbon:Ribbon x:Name="RibbonMenu" Grid.Row="0">
+			<!--Ribbon menu - Help -->
+			<ribbon:Ribbon.HelpPaneContent>
+				<ribbon:RibbonButton x:Name="HelpButton"
+									 SmallImageSource="Images\File\Help16.png"
+									 ToolTipTitle="Nápověda"
+									 ToolTipDescription="Zobrazí obsah nápovědy k programu."
+									 Click="HelpButton_Click" />
+			</ribbon:Ribbon.HelpPaneContent>
+			<!--Ribbon menu - FILE -->
+			<ribbon:Ribbon.ApplicationMenu>
+				<ribbon:RibbonApplicationMenu x:Name="FileMenuItem" SmallImageSource="Images\File\FileMenu.png">
+					<ribbon:RibbonApplicationMenuItem x:Name="FileOpenButton" IsEnabled="False"
+													  Header="Otevřít"
+													  ImageSource="Images\File\Open32.png"
+													  ToolTipTitle="Otevřít soubor"
+													  ToolTipDescription="Načte náskenovaný obrázek z disku." 
+													  ToolTipImageSource="Images\File\Open16.png" 
+													  Click="FileOpenButton_Click" />
+					<ribbon:RibbonApplicationMenuItem x:Name="FileSaveButton" IsEnabled="False"
+													  Header="Uložit"
+													  ImageSource="Images\File\Save32.png"
+													  ToolTipTitle="Uložit soubor"
+													  ToolTipDescription="Uloží náskenované obrázeky na disk." 
+													  ToolTipImageSource="Images\File\Save16.png" 
+													  Click="FileSaveButton_Click" />
+					<ribbon:RibbonApplicationMenuItem x:Name="FileRefreshMenuItem" IsEnabled="False"
+													  Header="Načíst znova"
+													  ImageSource="Images\File\RefreshBook32.png"
+													  ToolTipTitle="Načíst znova"
+													  ToolTipDescription="Znova načte publikaci." 
+													  ToolTipImageSource="Images\File\RefreshBook16.png" 
+													  Click="FileRefreshMenuItem_Click" />
+					<ribbon:RibbonSeparator />
+					<ribbon:RibbonApplicationMenuItem x:Name="OptionsMenuItem" 
+													  Header="Nastavení"
+													  ImageSource="Images\File\Options32.png"
+													  ToolTipTitle="Nastavení"
+													  ToolTipDescription="Zobrazí dialog pro nastavení aplikcace." 
+													  ToolTipImageSource="Images\File\Options16.png" 
+													  Click="OptionsMenuItem_Click" />
+					<ribbon:RibbonApplicationMenuItem x:Name="WebsiteMenuItem"
+													  Header="Webové stránky"
+													  ImageSource="Images\File\Website32.png"
+													  ToolTipTitle="Webové stránky"
+													  ToolTipImageSource="Images\File\Website16.png" 
+													  ToolTipDescription="Zobrazí webové stránky."
+													  Click="WebsiteMenuItem_Click" />
+					<ribbon:RibbonApplicationMenuItem x:Name="AboutAppMenuItem"
+													  Header="O programu"
+													  ImageSource="Images\File\About32.png"
+													  ToolTipTitle="O programu"
+													  ToolTipImageSource="Images\File\About16.png" 
+													  ToolTipDescription="Zobrazí informace o aplikaci." 
+													  Click="AboutAppMenuItem_Click" />
+					<ribbon:RibbonSeparator />
+					<ribbon:RibbonApplicationMenuItem x:Name="ExitAppMenuItem"
+													  Header="Konec"
+													  ImageSource="Images\File\Exit32.png"
+													  ToolTipTitle="Konec (Alt+F4)"
+													  ToolTipImageSource="Images\File\Exit16.png" 
+													  ToolTipDescription="Ukončí program." 
+													  Click="ExitAppMenuItem_Click" />
+					<ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
+						<StackPanel Orientation="Vertical" Margin="8" Width="Auto">
+							<TextBlock x:Name="FileAuxiliaryPaneTitle" FontWeight="Bold" Margin="0,0,0,5" />
+							<TextBlock x:Name="FileAuxiliaryPaneContent" TextWrapping="Wrap" />
+						</StackPanel>
+					</ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
+				</ribbon:RibbonApplicationMenu>
+			</ribbon:Ribbon.ApplicationMenu>
+			<!--Ribbon menu - HOME -->
+			<ribbon:RibbonTab x:Name="HomeTab" Header="Domů">
+				<!--Ribbon menu - HOME [Scan] -->
+				<ribbon:RibbonGroup x:Name="HomeScanGroup" Header="Publikace">
+					<ribbon:RibbonButton x:Name="NewBookButton"  IsEnabled="False"
+										 LargeImageSource="Images\Home\NewBook32.png"
+										 SmallImageSource="Images\Home\NewBook16.png"
+										 Label="Nová publikace"
+										 ToolTipTitle="Nová publikace (F2)" 
+										 ToolTipDescription="Načte nový záznam publikace pro skenování obálky a obsahu."
+										 ToolTipImageSource="Images\Home\NewBook16.png" 
+										 Click="NewBookButton_Click" />
+					<ribbon:RibbonButton x:Name="BrowseBookButton" IsEnabled="False"
+										 LargeImageSource="Images\Home\DiscardBook32.png"
+										 SmallImageSource="Images\Home\DiscardBook16.png"
+										 Label="Zamítnuté publikace"
+										 ToolTipTitle="Zamítnuté publikace" 
+										 ToolTipDescription="Umožnuje vybrat zamítnutou publikaci při OCR zpracování."
+										 ToolTipImageSource="Images\Home\DiscardBook16.png" 
+										 Click="BrowseBookButton_Click" />                    
+					<ribbon:RibbonButton x:Name="ScanFrontCoverButton" IsEnabled="False"
+										 LargeImageSource="Images\Home\ScanCover32.png"
+										 SmallImageSource="Images\Home\ScanCover16.png"
+										 Label="Skenovat obálku"
+										 ToolTipTitle="Skenovat obálku (F3)"
+										 ToolTipDescription="Naskenuje obálku publikace."
+										 ToolTipImageSource="Images\Home\ScanCover16.png" 
+										 Click="ScanFrontCoverButton_Click" />
+					<ribbon:RibbonButton x:Name="ScanTableOfContentsButton" IsEnabled="False"
+										 LargeImageSource="Images\Home\ScanContents32.png"
+										 SmallImageSource="Images\Home\ScanContents16.png"
+										 Label="Skenovat obsah"
+										 ToolTipTitle="Skenovat obsah (F4)"
+										 ToolTipDescription="Naskenuje obsah publikace."
+										 ToolTipImageSource="Images\Home\ScanContents16.png"
+										 Click="ScanTableOfContentsButton_Click" />
+					<ribbon:RibbonButton x:Name="SendScanButton" IsEnabled="False"
+										 LargeImageSource="Images\Home\SendScan32.png"
+										 SmallImageSource="Images\Home\SendScan16.png"
+										 Label="Odeslat na zpracování"
+										 ToolTipTitle="Odeslat na zpracování (F9)"
+										 ToolTipDescription="Odešle naskenovanané soubory obálky a obsahu na zpracování."
+										 ToolTipImageSource="Images\Home\SendScan16.png" 
+										 Click="SendScanButton_Click" />
+				</ribbon:RibbonGroup>
+				<!--Ribbon menu - HOME [Record] -->
+				<ribbon:RibbonGroup x:Name="HomeRecordGroup" Header="Záznam">
+					<ribbon:RibbonButton x:Name="PropertiesButton" IsEnabled="False"
+										 LargeImageSource="Images\Home\Properties32.png" 
+										 SmallImageSource="Images\Home\Properties16.png"
+										 Label="Vlastnosti"
+										 ToolTipTitle="Vlastnosti záznamu" 
+										 ToolTipDescription="Zobrazuje načtený MARC záznam (metadata)."
+										 ToolTipImageSource="Images\Home\Properties16.png" 
+										 Click="PropertiesButton_Click" />
+				</ribbon:RibbonGroup>
+				<!--Ribbon menu - HOME [Order] -->
+				<ribbon:RibbonGroup x:Name="HomeOrderGroup" Header="Uspořádání">
+					<ribbon:RibbonButton x:Name="ImageMoveForwardButton" IsEnabled="False"
+										 LargeImageSource="Images\Order\MoveForward32.png"
+										 SmallImageSource="Images\Order\MoveForward16.png"
+										 Label="Přesunout vpřed"
+										 ToolTipTitle="Přesunout vpřed (Drag&amp;Drop)" 
+										 ToolTipDescription="Přesune obrázek o jednu pozici vpřed."
+										 ToolTipImageSource="Images\Order\MoveForward16.png" 
+										 Click="ImageMoveForwardButton_Click" />
+					<ribbon:RibbonButton x:Name="ImageMoveBackwardButton" IsEnabled="False"
+										 LargeImageSource="Images\Order\MoveBackward32.png"
+										 SmallImageSource="Images\Order\MoveBackward16.png"
+										 Label="Přesunout vzad"
+										 ToolTipTitle="Přesunout vzad (Drag&amp;Drop)" 
+										 ToolTipDescription="Přesune obrázek o jednu pozici vzad."
+										 ToolTipImageSource="Images\Order\MoveBackward16.png" 
+										 Click="ImageMoveBackwardButton_Click" />
+					<ribbon:RibbonButton x:Name="ImageDeleteButton" IsEnabled="False"
+										 LargeImageSource="Images\Order\DeletePage32.png"
+										 SmallImageSource="Images\Order\DeletePage16.png"
+										 Label="Odstranit"
+										 ToolTipTitle="Odstranit obrázek (Del)" 
+										 ToolTipDescription="Odstraní naskenovaný obrázek ze seznamu."
+										 ToolTipImageSource="Images\Order\DeletePage16.png"
+										 Click="ImageDeleteButton_Click" />
+				</ribbon:RibbonGroup>
+				<!--Ribbon menu - HOME [Transform] -->
+				<ribbon:RibbonGroup x:Name="HomeTransformGroup" Header="Úpravy">
+					<ribbon:RibbonSplitButton x:Name="ImageRotateButton" IsEnabled="False"
+											  LargeImageSource="Images\Transform\Rotate32.png"
+											  SmallImageSource="Images\Transform\Rotate16.png"
+											  Label="Otočit"
+											  ToolTipTitle="Otočit obrázek (Ctrl+R)"
+											  ToolTipDescription="Otočí obrázek o 180°."
+											  ToolTipImageSource="Images\Transform\Rotate16.png"
+											  Click="ImageRotateFlipButton_Click">
+						<ribbon:RibbonSplitButton.Items>
+							<ribbon:RibbonSplitMenuItem x:Name="ImageRotateFlipButton" IsEnabled="False"
+														Header="Otočit o 180°"
+														ImageSource="Images\Transform\Rotate16.png" />
+							<ribbon:RibbonSplitMenuItem x:Name="ImageRotateLeftButton" IsEnabled="False"
+														Header="Otočit doleva"
+														ImageSource="Images\Transform\RotateLeft16.png"
+														Click="ImageRotateLeftButton_Click" />
+							<ribbon:RibbonSplitMenuItem x:Name="ImageRotateRightButton" IsEnabled="False"
+														Header="Otočit doprava"
+														ImageSource="Images\Transform\RotateRight16.png" 
+														Click="ImageRotateRightButton_Click" />
+							<ribbon:RibbonSplitMenuItem x:Name="ImageRotateAngleButton" IsEnabled="False"
+														Header="Otočit o úhel..."
+														ImageSource="Images\Transform\RotateFlip16.png"
+														Click="ImageRotateAngleButton_Click" />
+						</ribbon:RibbonSplitButton.Items>
+					</ribbon:RibbonSplitButton>
+					<ribbon:RibbonButton x:Name="ImageDeskewButton" IsEnabled="False"
+										 LargeImageSource="Images\Transform\Deskew32.png"
+										 SmallImageSource="Images\Transform\Deskew16.png"
+										 Label="Vyrovnat"
+										 ToolTipTitle="Vyrovnat obrázek (Ctrl+V)"
+										 ToolTipDescription="Automaticky upraví horizontální zarovnání podle sklonu textu."
+										 ToolTipImageSource="Images\Transform\Deskew16.png"
+										 Click="ImageDeskewButton_Click" />
+					<ribbon:RibbonSplitButton x:Name="ImageCropButton" IsEnabled="False"
+											  LargeImageSource="Images\Transform\Crop32.png"
+											  SmallImageSource="Images\Transform\Crop16.png"
+											  Label="Oříznout"
+											  ToolTipTitle="Oříznout obrázek (Ctrl+O)"
+											  ToolTipDescription="Umožňuje automaticky oříznout obrázek tak, aby obsahoval pouze aktuální výběr."
+											  ToolTipImageSource="Images\Transform\Crop16.png"
+											  Click="ImageCropSelectionButton_Click">
+						<ribbon:RibbonSplitButton.Items>                          
+							<ribbon:RibbonSplitMenuItem x:Name="ImageCropSelectionButton" IsEnabled="False"
+														Header="Oříznout obrázek"
+														ImageSource="Images\Transform\Crop16.png" />
+							<ribbon:RibbonSplitMenuItem x:Name="ImageCropAutoButton" IsEnabled="False"
+														Header="Automaticky oříznout"
+														ImageSource="Images\Transform\CropAuto16.png"
+														Click="ImageCropAutoButton_Click" />
+						</ribbon:RibbonSplitButton.Items>
+					</ribbon:RibbonSplitButton>
+					<ribbon:RibbonButton x:Name="ImageColorButton" IsEnabled="False"
+										 LargeImageSource="Images\Transform\Color32.png"
+										 SmallImageSource="Images\Transform\Color16.png"
+										 Label="Barvy"
+										 ToolTipTitle="Barvy obrázku (Ctrl+B)"
+										 ToolTipDescription="Umožňuje nastavit jas, kontrast a barevnou sytost obrázku."
+										 ToolTipImageSource="Images\Transform\Color16.png"
+										 Click="ImageColorButton_Click" />
+					<ribbon:RibbonButton x:Name="ImageUndoButton" IsEnabled="False"
+										 LargeImageSource="Images\Transform\Undo32.png"
+										 SmallImageSource="Images\Transform\Undo16.png"
+										 Label="Vrátit zpět"
+										 ToolTipTitle="Vrátit zpět obrázek (Ctrl+Z)"
+										 ToolTipDescription="Umožňuje vrátit zpět všechny úpravy a zobrazit původní naskenovaný obrázek."
+										 ToolTipImageSource="Images\Transform\Undo16.png"
+										 Click="ImageUndoButton_Click" />
+				</ribbon:RibbonGroup>
+			</ribbon:RibbonTab>
+			<!--Ribbon menu - VIEW -->
+			<ribbon:RibbonTab x:Name="ViewTab" Header="Zobrazení">
+				<!--Ribbon menu - VIEW [Navigate] -->
+				<ribbon:RibbonGroup x:Name="ViewNavigateGroup" Header="Navigace">
+					<ribbon:RibbonButton x:Name="FrontCoverButton" IsEnabled="False"
+										 LargeImageSource="Images\Navigate\FrontCover32.png"
+										 Label="Obálka"
+										 ToolTipTitle="Zobrazí obálku (Shift+Home)"
+										 ToolTipDescription="Umožňuje nastavit obálku do editačného okna."
+										 ToolTipImageSource="Images\Navigate\FrontCover16.png" 
+										 Click="FrontCoverButton_Click" />                    
+					<ribbon:RibbonButton x:Name="TableOfContentsButton" IsEnabled="False"
+										 LargeImageSource="Images\Navigate\TableOfContents32.png"
+										 Label="Obsah"
+										 ToolTipTitle="Zobrazí obah"
+										 ToolTipDescription="Umožňuje nastavit obsah do editačného."
+										 ToolTipImageSource="Images\Navigate\TableOfContents16.png" 
+										 Click="TableOfContentsButton_Click" />
+					<ribbon:RibbonButton x:Name="PreviousPageButton" IsEnabled="False"
+										 LargeImageSource="Images\Navigate\PreviousPage32.png"
+										 Label="Předchozí strana"
+										 ToolTipTitle="Předchozí strana (Shift+PageUp)"
+										 ToolTipDescription="Umožňuje nastavit předchozí stranu obsahu."
+										 ToolTipImageSource="Images\Navigate\PreviousPage16.png" 
+										 Click="PreviousPageButton_Click" />
+					<ribbon:RibbonButton x:Name="NextPageButton" IsEnabled="False"
+										 LargeImageSource="Images\Navigate\NextPage32.png"
+										 Label="Další strana"
+										 ToolTipTitle="Další strana (Shift+PageDown)"
+										 ToolTipDescription="Umožňuje nastavit další stranu obsahu."
+										 ToolTipImageSource="Images\Navigate\NextPage16.png" 
+										 Click="NextPageButton_Click" />
+				</ribbon:RibbonGroup>
+				<!--Ribbon menu - VIEW [Zoom] -->
+				<ribbon:RibbonGroup x:Name="ViewZoomGroup" Header="Lupa">
+					<ribbon:RibbonButton x:Name="ZoomInButton" IsEnabled="False"
+										 LargeImageSource="Images\View\ZoomIn32.png"
+										 Label="Přiblížit"
+										 ToolTipTitle="Přiblížit obrázek"
+										 ToolTipDescription="Umožňuje přiblížit obrázek."
+										 ToolTipImageSource="Images\View\ZoomIn16.png" 
+										 Click="ZoomInButton_Click" />
+					<ribbon:RibbonButton x:Name="ZoomOutButton" IsEnabled="False"
+										 LargeImageSource="Images\View\ZoomOut32.png"
+										 Label="Oddálit"
+										 ToolTipTitle="Oddálit obrázek"
+										 ToolTipDescription="Umožňuje oddálit obrázek."
+										 ToolTipImageSource="Images\View\ZoomOut16.png" 
+										 Click="ZoomOutButton_Click" />
+					<ribbon:RibbonButton x:Name="BestFitButton" IsEnabled="False"
+										 LargeImageSource="Images\View\BestFit32.png" 
+										 Label="Přispůsobit oknu"
+										 ToolTipTitle="Přispůsobit oknu" 
+										 ToolTipDescription="Přispůsobí obrázek oknu."
+										 ToolTipImageSource="Images\View\BestFit16.png" 
+										 Click="BestFitButton_Click" />
+					<ribbon:RibbonButton x:Name="ActualSizeButton" IsEnabled="False"
+										 LargeImageSource="Images\View\ActualSize32.png" 
+										 Label="Skutečná velikost"
+										 ToolTipTitle="Skutečná velikost" 
+										 ToolTipDescription="Zobrazí obrázek ve skutečné velikosti." 
+										 ToolTipImageSource="Images\View\ActualSize16.png" 
+										 Click="ActualSizeButton_Click" />
+				</ribbon:RibbonGroup>
+			</ribbon:RibbonTab>
+			<!--Ribbon menu - OPTIONS -->
+			<ribbon:RibbonTab x:Name="OptionsTab" Header="Nastavení">
+				<ribbon:RibbonGroup x:Name="ScannerGroup" Header="Vybrat zdroj">
+					<ribbon:RibbonMenuButton x:Name="CatalogueButton" Width="55px"
+											 LargeImageSource="Images\Options\Catalogue32.png"
+											 Label="Katalog"
+											 ToolTipTitle="Vybrat katalog"
+											 ToolTipDescription="Umožňuje vybrat katalog pro skenování."
+											 ToolTipImageSource="Images\Options\Catalogue16.png">
+					</ribbon:RibbonMenuButton>
+					<ribbon:RibbonMenuButton x:Name="ScannerButton" Width="55px"
+											 LargeImageSource="Images\Options\Scanner32.png"
+											 Label="Skener"
+											 ToolTipTitle="Vybrat skener"
+											 ToolTipDescription="Umožňuje vybrat zařízení pro skenování."
+											 ToolTipImageSource="Images\Options\Scanner16.png">
+					</ribbon:RibbonMenuButton>
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup x:Name="ScannerColorModeGroup" Header="Barený mód" IsEnabled="False">
+					<ribbon:RibbonComboBox x:Name="ScanCoverPixelTypeComboBox"
+										   Label="Obálka:"
+										   IsEditable="False"
+										   SelectionBoxWidth="67"
+										   ToolTipTitle="Barený mód"
+										   ToolTipDescription="Umožňuje vybrat barený mód pro skenování obálky.">
+						<ribbon:RibbonGallery x:Name="ScanCoverPixelTypeGallery" 
+											  MaxColumnCount="1"
+											  SelectedValuePath="Name"
+											  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCoverPixelType, Mode=TwoWay}">
+							<ribbon:RibbonGalleryCategory x:Name="ScanCoverPixelTypeCategory" DisplayMemberPath="Description" />
+						</ribbon:RibbonGallery>
+					</ribbon:RibbonComboBox>
+					<ribbon:RibbonComboBox x:Name="ScanContentsPixelTypeComboBox"
+										   Label="Obsah: "
+										   IsEditable="False"
+										   SelectionBoxWidth="67"
+										   ToolTipTitle="Barený mód"
+										   ToolTipDescription="Umožňuje vybrat barený mód pro skenování obálky.">
+						<ribbon:RibbonGallery x:Name="ScanContentsPixelTypeGallery" 
+											  MaxColumnCount="1"
+											  SelectedValuePath="Name"
+											  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanContentsPixelType, Mode=TwoWay}">
+							<ribbon:RibbonGalleryCategory x:Name="ScanContentsPixelTypeCategory" DisplayMemberPath="Description" />
+						</ribbon:RibbonGallery>
+					</ribbon:RibbonComboBox>
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup x:Name="ScannerResolutionGroup" Header="Rozlišení (DPI)" IsEnabled="False">
+					<ribbon:RibbonComboBox x:Name="ScanCoverResolutionComboBox"
+										   Label="Obálka:"
+										   IsEditable="False"
+										   SelectionBoxWidth="30"
+										   ToolTipTitle="Rozlišení (DPI)"
+										   ToolTipDescription="Umožňuje nastavit rozlišení pro skenování obálky.">
+						<ribbon:RibbonGallery x:Name="ScanCoverResolutionGallery" 
+											  MaxColumnCount="1"
+											  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCoverResolution, Mode=TwoWay}">
+							<ribbon:RibbonGalleryCategory x:Name="ScanCoverResolutionCategory" />
+						</ribbon:RibbonGallery>
+					</ribbon:RibbonComboBox>
+					<ribbon:RibbonComboBox x:Name="ScanContentsResolutionComboBox"
+										   Label="Obsah: "
+										   IsEditable="False"
+										   SelectionBoxWidth="30"
+										   ToolTipTitle="Rozlišení (DPI)"
+										   ToolTipDescription="Umožňuje nastavit rozlišení pro skenování obsahu.">
+						<ribbon:RibbonGallery x:Name="ScanContentsResolutionGallery" 
+											  MaxColumnCount="1"
+											  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanContentsResolution, Mode=TwoWay}">
+							<ribbon:RibbonGalleryCategory x:Name="ScanContentsResolutionCategory" />
+						</ribbon:RibbonGallery>
+					</ribbon:RibbonComboBox>
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup x:Name="ScannerPageSizeGroup" Header="Velikost stránky" IsEnabled="False">
+					<ribbon:RibbonToggleButton x:Name="ScannerPageSizeNoneButton" 
+											   LargeImageSource="Images\Options\PageSizeNone.png"
+											   Label="Výchozí"
+											   ToolTipTitle="Výchozí velikost (Ctrl+0)"
+											   ToolTipDescription="Umožňuje nastavit maximální velikost skenování." 
+											   Click="ScannerPageSizeNoneButton_Click" />
+					<ribbon:RibbonToggleButton x:Name="ScannerPageSizeA4Button" 
+											   LargeImageSource="Images\Options\PageSizeA4.png"
+											   Label="A4 formát"
+											   ToolTipTitle="A4 formát (Ctrl+4)"
+											   ToolTipDescription="Ctrl zvolit A4 formát pro skenování." 
+											   Click="ScannerPageSizeA4Button_Click" />
+					<ribbon:RibbonToggleButton x:Name="ScannerPageSizeA5Button" 
+											   LargeImageSource="Images\Options\PageSizeA5.png"
+											   Label="A5 formát"
+											   ToolTipTitle="A5 formát (Ctrl+5)"
+											   ToolTipDescription="Umožňuje zvolit A5 formát pro skenování." 
+											   Click="ScannerPageSizeA5Button_Click" />
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup x:Name="ScannerPageOrientationGroup" Header="Orientace stránky" IsEnabled="False">
+					<ribbon:RibbonToggleButton x:Name="ScannerPageOrientationPortraitButton" 
+											   LargeImageSource="Images\Options\Portrait32.png"
+											   Label="Na výšku"
+											   ToolTipTitle="Orientace na výšku"
+											   ToolTipDescription="Umožňuje nastavit orientaci stránky na výšku." 
+											   Click="ScannerPageOrientationPortraitButton_Click" />
+					<ribbon:RibbonToggleButton x:Name="ScannerPageOrientationLandscapeButton"
+											   LargeImageSource="Images\Options\Landscape32.png"
+											   Label="Na šířku"
+											   ToolTipTitle="Orientace na šířku"
+											   ToolTipDescription="Umožňuje nastavit orientaci stránky na šířku."
+											   Click="ScannerPageOrientationLandscapeButton_Click" />
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup x:Name="ScannerAutomaticEditGroup" Header="Automatické úpravy" IsEnabled="False">
+					<ribbon:RibbonCheckBox x:Name="ScannerAutomaticDeskewCheckBox" 
+										   IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticDeskew, Mode=TwoWay}"
+										   Label="Vyrovnání obrázku"
+										   ToolTipTitle="Vyrovnání obrázku"
+										   ToolTipDescription="Automatické vyrovnání naskenovaného obrázku" 
+										   Click="ScannerAutomaticDeskewCheckBox_Click" />
+					<ribbon:RibbonCheckBox x:Name="ScannerAutomaticBorderDetectionCheckBox" 
+										   IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticBorderDetection, Mode=TwoWay}"
+										   Label="Detekce hranic"
+										   ToolTipTitle="Detekce hranic"
+										   ToolTipDescription="Automatická detekce hranic naskenovaného obrázku" 
+										   Click="ScannerAutomaticBorderDetectionCheckBox_Click" />
+					<ribbon:RibbonCheckBox x:Name="ScannerAutomaticRotateCheckBox" 
+										   IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticRotate, Mode=TwoWay}"
+										   Label="Rotace obrázku"
+										   ToolTipTitle="Rotace obrázku"
+										   ToolTipDescription="Automatická rotace naskenovaného obrázku" 
+										   Click="ScannerAutomaticRotateCheckBox_Click" />
+					<ribbon:RibbonCheckBox x:Name="ScannerAutomaticColorCorectionCheckBox" 
+										   IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerAutomaticColorCorection, Mode=TwoWay}"
+										   Label="Korekce barev"
+										   ToolTipTitle="Korekce barev"
+										   ToolTipDescription="Automatická korekce barev naskenovaného obrázku" />
+				</ribbon:RibbonGroup>
+			</ribbon:RibbonTab>
+		</ribbon:Ribbon>        
+		<!--Main desktop-->
+		<Grid x:Name="MainDesktopGrid" Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Name="FrontCoverColumn" Width="245" MinWidth="245" MaxWidth="400" />
+				<ColumnDefinition />
+				<ColumnDefinition Name="TableOfContentsColumn" Width="160" MinWidth="160" MaxWidth="300" />
+			</Grid.ColumnDefinitions>
+			<!--FrontCover thumbnails-->
+			<Grid x:Name="LeftPanelGrid" Grid.Row="0" Grid.Column="0" Background="Silver">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="26" />
+					<RowDefinition Height="333" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Grid.Row="0" Style="{StaticResource ThumbnailsBorder}">
+					<TextBlock x:Name="FrontCoverTextBlock" Text="OBÁLKA" Style="{StaticResource ThumbnailsTextBlock}" />
+				</Border>
+				<ictn:ImgThumbnails Name="FrontCoverThumbnails" Grid.Row="1"
+									Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A"
+									BorderThickness="1"
+									BorderBrush="LightGray" 
+									FontSize="13" 
+									VerticalAlignment="Top"
+									Height="333" 
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									ShowCaptionNumbers="False"
+									ThumbnailSize="200,300"
+									ThumbnailSelectionThickness="1" 
+									ThumbnailLoaded="FrontCoverThumbnails_ThumbnailLoaded" 
+									ThumbnailSelected="FrontCoverThumbnails_ThumbnailSelected"
+									ThumbnailMouseLeftButtonDown="FrontCoverThumbnails_ThumbnailMouseLeftButtonDown" />
+				<Image Name="ObalkyKnihImage" Grid.Row="1" Visibility="Hidden" 
+					   Source="/Comdat.DOZP.App;component/Images/ObalkyKnihCZ.png" 
+					   Height="26" Margin="3" VerticalAlignment="Bottom" />
+				<local:BookInfoBox x:Name="CurrentBookInfoBox" Grid.Row="2"
+								   BorderThickness="1" 
+								   BorderBrush="LightGray" />
+			</Grid>
+			<!--Main image-->
+			<GridSplitter x:Name="FrontCoverSplitter" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="5" />
+			<icie:ImgEdit Name="FrontCoverImgEdit" Grid.Row="0" Grid.Column="1" Visibility="Hidden"
+						Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A"
+						BorderThickness="1"
+						Margin="5" 
+						HorizontalContentAlignment="Center" 
+						VerticalContentAlignment="Center"                          
+						ImageLoaded="FrontCoverImgEdit_ImageLoaded"
+						ImageChanged="FrontCoverImgEdit_ImageChanged"
+						PageChanged="FrontCoverImgEdit_PageChanged" 
+						ImageSaved="FrontCoverImgEdit_ImageSaved"
+						ImageClosed="FrontCoverImgEdit_ImageClosed" 
+						ErrorOccurred="FrontCoverImgEdit_ErrorOccurred" />
+			<icis:ImgScan Name="FrontCoverImgScan" Grid.Row="0" Grid.Column="1"
+						  Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A" 
+						  ScanStarted="FrontCoverImgScan_ScanStarted" 
+						  ScanFinished="FrontCoverImgScan_ScanFinished"
+						  ErrorOccurred="FrontCoverImgScan_ErrorOccurred" />        
+			<icie:ImgEdit Name="TableOfContentsImgEdit" Grid.Row="0" Grid.Column="1" Visibility="Hidden"
+						Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A"
+						BorderThickness="1"
+						Margin="5" 
+						HorizontalContentAlignment="Center" 
+						VerticalContentAlignment="Center"                          
+						ImageLoaded="TableOfContentsImgEdit_ImageLoaded"
+						ImageChanged="TableOfContentsImgEdit_ImageChanged"
+						ImageSaved="TableOfContentsImgEdit_ImageSaved"
+						ImageClosed="TableOfContentsImgEdit_ImageClosed"                          
+						PageLoaded="TableOfContentsImgEdit_PageLoaded" 
+						PageRequested="TableOfContentsImgEdit_PageRequested" 
+						PageChanged="TableOfContentsImgEdit_PageChanged" 
+						PageNavigated="TableOfContentsImgEdit_PageNavigated" 
+						PageSaved="TableOfContentsImgEdit_PageSaved" 
+						WorkingStarted="TableOfContentsImgEdit_WorkingStarted" 
+						WorkingProgress="TableOfContentsImgEdit_WorkingProgress" 
+						WorkingFinished="TableOfContentsImgEdit_WorkingFinished" 
+						ErrorOccurred="TableOfContentsImgEdit_ErrorOccurred" />
+			<icis:ImgScan Name="TableOfContentsImgScan" Grid.Row="0" Grid.Column="1"
+						  Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A" 
+						  ScanStarted="TableOfContentsImgScan_ScanStarted" 
+						  ScanPageStarted="TableOfContentsImgScan_ScanPageStarted" 
+						  ScanPageFinished="TableOfContentsImgScan_ScanPageFinished" 
+						  ScanFinished="TableOfContentsImgScan_ScanFinished"
+						  ErrorOccurred="TableOfContentsImgScan_ErrorOccurred" />
+			<Image Name="WorkingGifImage" Grid.Row="0" Grid.Column="1" gif:ImageBehavior.AnimatedSource="Images/Working.gif" Panel.ZIndex="100" Stretch="None" Visibility="Hidden" />
+			<GridSplitter x:Name="TableOfContentsSplitter" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="5" />
+			<!--TableOfContents thumbnails-->
+			<Grid x:Name="RightPanelGrid" Grid.Row="0" Grid.Column="2" Background="Silver">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="26" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Grid.Row="0" Style="{StaticResource ThumbnailsBorder}">
+					<TextBlock x:Name="TableOfContentsTextBlock" Text="OBSAH" Style="{StaticResource ThumbnailsTextBlock}" Padding="5,0" />
+				</Border>
+				<ictn:ImgThumbnails Name="TableOfContentsThumbnails" Grid.Row="1"
+									Registration="3D98-E5C7-C5E5-C8FE-A8E4-9B72-8694-4E5A" 
+									BorderThickness="1" 
+									Background="Silver" 
+									CaptionStartNumber="1"
+									DefaultThumbnailCaption="strana " 
+									FontSize="13" 
+									HorizontalAlignment="Stretch" 
+									VerticalAlignment="Stretch"
+									HorizontalContentAlignment="Left" 
+									VerticalContentAlignment="Top" 
+									ThumbnailSelectionBorderColor="Red" 
+									ThumbnailSize="120,190"
+									ThumbnailsOrientation="Vertical" 
+									ThumbnailLoaded="TableOfContentsThumbnails_ThumbnailLoaded" 
+									ThumbnailSelected="TableOfContentsThumbnails_ThumbnailSelected"
+									ThumbnailMouseLeftButtonDown="TableOfContentsThumbnails_ThumbnailMouseLeftButtonDown" 
+									ThumbnailDragFinished="TableOfContentsThumbnails_ThumbnailDragFinished" />
+			</Grid>
+		</Grid>
+		<!--StatusBar-->
+		<StatusBar x:Name="StatusBar" Grid.Row="2" FontSize="12" AllowDrop="False">
+			<StatusBar.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="26" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="250" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+					</Grid>
+				</ItemsPanelTemplate>
+			</StatusBar.ItemsPanel>
+			<StatusBarItem Grid.Column="0">
+				<TextBlock x:Name="ScannedImagesStatusBar" Padding="5,0"></TextBlock>
+			</StatusBarItem>
+			<StatusBarItem Grid.Column="1">
+				<TextBlock x:Name="MessageStatusBar" Padding="5,0"></TextBlock>
+			</StatusBarItem>
+			<StatusBarItem Grid.Column="2">
+				<ProgressBar x:Name="WorkingProgressBar" Padding="5,0" Height="15" Width="100" VerticalAlignment="Center" Visibility="Hidden" />
+			</StatusBarItem>
+			<Separator Grid.Column="3" />
+			<StatusBarItem Grid.Column="4">
+				<TextBlock x:Name="MemoryStatusBar" Padding="5,0,10,0">RAM: 0MB</TextBlock>
+			</StatusBarItem>
+			<Separator Grid.Column="5" />
+			<StatusBarItem Grid.Column="6">
+				<TextBlock x:Name="TimerStatusBar" Padding="5,0,10,0">Čas: 0,00s</TextBlock>
+			</StatusBarItem>
+		</StatusBar>
+	</Grid>
+</ribbon:RibbonWindow>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="Comdat.DOZP.OCR.ActivityDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Comdat.DOZP.OCR"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Icon="/Comdat.DOZP.OCR;component/Images/MsgBox/Question.png"
+        Title="OCR aktivita" 
+        Height="220" Width="450"        
+        ResizeMode="NoResize"
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterOwner" 
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Margin" Value="10" />
+            </Style>         
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="75" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Margin" Value="5,0,0,0" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image x:Name="ActivityImage" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="10" 
+                Source="/Images/MsgBox/Question.png" Stretch="None" />
+        <Label x:Name="QuestionLabel" Grid.Column="1" Grid.Row="0" FontSize="13" FontWeight="Bold" Margin="0,5"
+                Content="Chcete opravdu ... ?" />
+        <Label x:Name="CommentLabel" Grid.Column="1" Grid.Row="1" 
+                Content="Komentář (není nutné zadávat):" />
+        <TextBox x:Name="CommentTextBox" Grid.Column="1" Grid.Row="2" Margin="5,0,5,10" FontSize="13" TextWrapping="Wrap" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    TextChanged="CommentTextBox_TextChanged" />
+        <StackPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Name="YesButton" IsDefault="True" Click="YesButton_Click">Ano</Button>
+            <Button Name="NolButton" IsCancel="True">Ne</Button>
+        </StackPanel>
+    </Grid>
+</Window>

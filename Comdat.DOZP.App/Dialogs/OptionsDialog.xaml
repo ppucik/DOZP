@@ -1,0 +1,204 @@
+﻿<Window x:Class="Comdat.DOZP.App.OptionsDialog"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:Comdat.DOZP.App" 
+		xmlns:icis="clr-namespace:ImageComponents.WPF.Imaging;assembly=ImageComponents.WPF.ImgScan" 
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+		Icon="/Comdat.DOZP.App;component/Images/File/Options16.png" 
+		Title="Nastavení" 
+		Width="450" SizeToContent="Height"
+		ResizeMode="NoResize"
+		ShowInTaskbar="False"
+		WindowStartupLocation="CenterOwner" 
+		Loaded="Window_Loaded" ContentRendered="Window_ContentRendered">
+	<Grid>
+		<Grid.Resources>
+			<Style TargetType="{x:Type Grid}">
+				<Setter Property="Margin" Value="5" />
+			</Style>
+			<Style TargetType="{x:Type CheckBox}">
+				<Setter Property="Margin" Value="10,5" />
+			</Style>
+			<Style TargetType="{x:Type TextBox}">
+				<Setter Property="Margin" Value="5,0,5,5" />
+			</Style>
+			<Style TargetType="{x:Type ComboBox}">
+				<Setter Property="Margin" Value="5,0,5,5" />
+			</Style>
+			<Style TargetType="{x:Type local:EnumComboBox}">
+				<Setter Property="Margin" Value="5,0,5,5" />
+			</Style>
+			<Style TargetType="{x:Type Button}">
+				<Setter Property="Width" Value="75" />
+				<Setter Property="Height" Value="25" />
+				<Setter Property="Margin" Value="5,10,0,0" />
+			</Style>
+		</Grid.Resources>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<TabControl x:Name="OptionsTabControl" Grid.Column="0" Grid.Row="0"  Height="380" Margin="0">
+			<TabItem x:Name="GeneralTabItem" Header="Obecné">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<Label x:Name="CatalogueLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Připojený katalog:" />
+					<ComboBox x:Name="CatalogueComboBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+							  DisplayMemberPath="Name" SelectedValuePath="CatalogueID"
+							  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=SelectedCatalogueID, Mode=OneWay}" />
+					<Label x:Name="ScanFolderPathLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Složka pro ukládání naskenovaných souborů:"/>
+					<TextBox x:Name="ScanFolderPathTextBox" Grid.Column="0" Grid.Row="3" IsReadOnly="True"
+							 Text="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanFolderPath, Mode=OneWay}" Margin="0,0,0,5" />
+					<Button x:Name="ScanFolderButton" Grid.Column="1" Grid.Row="3" Margin="5,0,0,5" Height="22" 
+							Content="Vybrat..." Click="ScanFolderButton_Click" />                    
+					<GroupBox Grid.Column="0" Grid.Row="5" Header="Obálky knih">
+						<StackPanel>
+							<CheckBox x:Name="CheckObalkyKnihCZCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
+									  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=CheckObalkyKnihCZ, Mode=OneWay}" 
+									  Content="Kontrolovat obálky na webu ObalkyKnih.cz" />
+							<CheckBox x:Name="ImportObalkyKnihCZCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"
+									  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ImportObalkyKnihCZ, Mode=OneWay}" 
+									  Content="Importovat obálky na web ObalkyKnih.cz" />                           
+						</StackPanel>
+					</GroupBox>
+					<CheckBox x:Name="MainWindowTopmostCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=MainWindowTopmost, Mode=OneWay}" 
+							  Content="Zobrazovat okno aplikace vždy navrchu" />
+					<CheckBox x:Name="AdvancedColorCorectionCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AdvancedColorCorection, Mode=OneWay}" 
+							  Content="Pokročilé funkce pro korekci barev" />
+					<CheckBox x:Name="ScanRotateEvenPageCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanRotateEvenPage, Mode=OneWay}" 
+							  Content="Otáčet sudé stránky obsahu (nahrazuje automatickou rotaci)" />
+					<CheckBox x:Name="ScanEnablePreviewCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanEnablePreview, Mode=OneWay}" 
+							  Content="Spustit skenování na pozadí" />
+					<CheckBox x:Name="ScanShowIndicatorsCheckBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanShowIndicators, Mode=OneWay}" 
+							  Content="Zobrazovat idikátor skenování" />
+					<CheckBox x:Name="AppLoggingCheckBox" Grid.Column="0" Grid.Row="12"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=AppLogging, Mode=OneWay}" 
+							  Content="Zapisovat zprávy a chyby do log souboru" />
+					<Button x:Name="AppLoggingButton" Grid.Column="1" Grid.Row="12" Margin="5,0,0,5" Height="22" 
+							Content="Zobrazit..." Click="AppLoggingButton_Click" />
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="ScanningTabItem" Header="Skener">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="199" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+						<Label x:Name="ScannerSourceNameLabel"  Content="Výběr skeneru:" />
+						<ComboBox x:Name="ScannerSourceNameComboBox"
+								  SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerSourceName, Mode=OneWay}" SelectionChanged="ScannerSourceNameComboBox_SelectionChanged" />
+					</StackPanel>
+					<StackPanel Grid.Column="0" Grid.Row="1">
+						<Label x:Name="ScanCapTransferModeLabel" Content="Způsob přenosu obrázku:" />
+						<local:EnumComboBox x:Name="ScanCapTransferModeComboBox" LoadOnInit="False"
+											EnumTypeName="ImageComponents.WPF.Imaging.ImgScan+ICImageTransferMode, ImageComponents.WPF.ImgScan"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapTransferMode, Mode=OneWay}" />
+					</StackPanel>
+					<StackPanel Grid.Column="1" Grid.Row="1">
+						<Label x:Name="ScanCapImageFileFormatLabel" Content="Formát obrázku:" />
+						<local:EnumComboBox x:Name="ScanCapImageFileFormatComboBox" LoadOnInit="False"
+											EnumTypeName="ImageComponents.WPF.Imaging.ImgScan+ICTwainImageFileFormats, ImageComponents.WPF.ImgScan"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapImageFileFormat, Mode=OneWay}" />
+					</StackPanel>
+					<StackPanel Grid.Column="0" Grid.Row="2">
+						<Label x:Name="ScanCapPixelTypeLabel" Content="Barevný mód:" />
+						<local:EnumComboBox x:Name="ScanCapPixelTypeComboBox" LoadOnInit="False"
+											EnumTypeName="ImageComponents.WPF.Imaging.ImgScan+ICTwainPixelTypes, ImageComponents.WPF.ImgScan"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapPixelType, Mode=OneWay}" />
+					</StackPanel>
+					<StackPanel Grid.Column="1" Grid.Row="2">
+						<Label x:Name="ScanCapResolutionsLabel" Content="Rozlišení (DPI):" />
+						<local:EnumComboBox x:Name="ScanCapResolutionsComboBox" LoadOnInit="False"
+											EnumTypeName="System.Collections.Generic.List(Int32)"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapResolutions, Mode=OneWay}" />
+					</StackPanel>
+					<StackPanel Grid.Column="0" Grid.Row="3">
+						<Label x:Name="ScanCapPaperOrientationLabel" Content="Orientace stránky:" />
+						<local:EnumComboBox x:Name="ScanCapPaperOrientationComboBox" LoadOnInit="False"
+											EnumTypeName="ImageComponents.WPF.Imaging.ImgScan+ICTwainOrientations, ImageComponents.WPF.ImgScan"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapPaperOrientation, Mode=OneWay}" />
+					</StackPanel>
+					<StackPanel Grid.Column="1" Grid.Row="3">
+						<Label x:Name="ScanCapPaperSizeLabel" Content="Velikost stránky:" />
+						<local:EnumComboBox x:Name="ScanCapPaperSizeComboBox" LoadOnInit="False"
+											EnumTypeName="ImageComponents.WPF.Imaging.ImgScan+ICTwainSupportedSizes, ImageComponents.WPF.ImgScan"
+											SelectedValue="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapPaperSize, Mode=OneWay}" />
+					</StackPanel>
+					<CheckBox x:Name="ScannerBackColorBlackCheckBox" Grid.Column="0" Grid.Row="4"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerBackColorBlack, Mode=OneWay}" 
+							  Content="Černé pozadí plochy skeneru" />
+					<StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+						<Label x:Name="ScannerBackColorToleranceLabel" Content="Tolerance barvy pozadí: " />
+						<xctk:DoubleUpDown Name="ScannerBackColorToleranceUpDown"
+								   Minimum="0" Maximum="1" Increment="0.1" FormatString="N1" Margin="3" Width="50"
+								   Value="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScannerBackColorTolerance, Mode=OneWay}" />
+					</StackPanel>                                          
+					<CheckBox x:Name="ScanShowScannerUICheckBox" Grid.Column="0" Grid.Row="5"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanShowScannerUI, Mode=OneWay}" 
+							  Content="Zobrazovat nastavení skeneru" />
+					<CheckBox x:Name="ScanRemoveBlackBordersCheckBox"  Grid.Column="1" Grid.Row="5"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanRemoveBlackBorders, Mode=OneWay}" 
+							  Content="Odstránit černé okraje" />
+					<CheckBox x:Name="ScanCapAutoDeskewCheckBox" Grid.Column="0" Grid.Row="6"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapAutoDeskew, Mode=OneWay}" 
+							  Content="Automatické vyrovnání" />
+					<CheckBox x:Name="ScanCapAutoBorderDetectionCheckBox" Grid.Column="1" Grid.Row="6"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapAutoBorderDetection, Mode=OneWay}" 
+							  Content="Automatická detekce hranic" />
+					<CheckBox x:Name="ScanCapAutoRotationCheckBox" Grid.Column="0" Grid.Row="7"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapAutoRotation, Mode=OneWay}" 
+							  Content="Automatická rotace" />
+					<CheckBox x:Name="ScanCapAutoBrightnessCheckBox" Grid.Column="1" Grid.Row="7"
+							  IsChecked="{Binding Source={x:Static local:Properties.Settings.Default}, Path=ScanCapAutoBrightness, Mode=OneWay}" 
+							  Content="Automatické nastavení jasu" />
+
+				</Grid>
+			</TabItem>
+		</TabControl>
+
+		<StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Name="OkButton" IsDefault="True" Click="OkButton_Click">OK</Button>
+			<Button Name="CancelButton" IsCancel="True">Storno</Button>
+		</StackPanel>
+	</Grid>
+</Window>

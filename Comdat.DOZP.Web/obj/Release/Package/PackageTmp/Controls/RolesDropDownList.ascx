@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RolesDropDownList.ascx.cs" Inherits="Comdat.DOZP.Web.Controls.RolesDropDownList" %>
+<asp:DropDownList ID="DropDownList" runat="server" CssClass="DropDownListItems" />
