@@ -1,2 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PagerDropDownList.ascx.cs" Inherits="Comdat.DOZP.Web.Controls.PagerDropDownList" %>
-<span>zobrazit:&nbsp;</span><asp:DropDownList ID="DropDownList" runat="server" AutoPostBack="true" ToolTip="Počet záznamů na stránce" Width="50px" OnSelectedIndexChanged="DropDownList_SelectedIndexChanged" /><span>&nbsp;na&nbsp;stránce</span>
