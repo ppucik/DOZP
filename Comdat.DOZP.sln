@@ -30,40 +30,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comdat.DOZP.App", "Comdat.DOZP.App\Comdat.DOZP.App.csproj", "{7AB7D4F0-6CF5-4050-B504-787EA36CF046}"
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 11
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Comdat.DOZP.Scan\\Comdat.DOZP.Scan.csproj
-		SccLocalPath1 = .
-		SccProjectFilePathRelativizedFromConnection1 = Comdat.DOZP.Scan\\
-		SccProjectUniqueName2 = Comdat.DOZP.Web\\Comdat.DOZP.Web.csproj
-		SccLocalPath2 = .
-		SccProjectFilePathRelativizedFromConnection2 = Comdat.DOZP.Web\\
-		SccProjectUniqueName3 = Comdat.DOZP.Service\\Comdat.DOZP.Services.csproj
-		SccLocalPath3 = .
-		SccProjectFilePathRelativizedFromConnection3 = Comdat.DOZP.Service\\
-		SccProjectUniqueName4 = Comdat.DOZP.Process\\Comdat.DOZP.Process.csproj
-		SccLocalPath4 = .
-		SccProjectFilePathRelativizedFromConnection4 = Comdat.DOZP.Process\\
-		SccProjectUniqueName5 = Comdat.DOZP.OCR\\Comdat.DOZP.OCR.csproj
-		SccLocalPath5 = .
-		SccProjectFilePathRelativizedFromConnection5 = Comdat.DOZP.OCR\\
-		SccProjectUniqueName6 = Comdat.DOZP.Data\\Comdat.DOZP.Data.csproj
-		SccLocalPath6 = .
-		SccProjectFilePathRelativizedFromConnection6 = Comdat.DOZP.Data\\
-		SccProjectUniqueName7 = Comdat.DOZP.Core\\Comdat.DOZP.Core.csproj
-		SccLocalPath7 = .
-		SccProjectFilePathRelativizedFromConnection7 = Comdat.DOZP.Core\\
-		SccProjectUniqueName8 = Comdat.DOZP.Test\\Comdat.DOZP.Test.csproj
-		SccProjectName8 = \u0022$/Comdat.DOZP.Test\u0022,\u0020SEAAAAAA
-		SccLocalPath8 = Comdat.DOZP.Test
-		SccProjectUniqueName9 = Comdat.DOZP.Agent\\Comdat.DOZP.Agent.csproj
-		SccLocalPath9 = .
-		SccProjectFilePathRelativizedFromConnection9 = Comdat.DOZP.Agent\\
-		SccProjectUniqueName10 = Comdat.DOZP.App\\Comdat.DOZP.App.csproj
-		SccProjectName10 = \u0022$/Comdat.DOZP.App\u0022,\u0020OGBAAAAA
-		SccLocalPath10 = Comdat.DOZP.App
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
