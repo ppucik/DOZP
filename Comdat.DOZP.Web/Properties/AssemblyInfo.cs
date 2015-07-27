@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DOZP-Web")]
-[assembly: AssemblyDescription("Digitalizace a OCR zpracování publikací")]
+[assembly: AssemblyDescription("Digitalizace a OCR zpracování publikací.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Comdat s.r.o.")]
 [assembly: AssemblyProduct("Comdat.DOZP.Web")]
