@@ -26,11 +26,6 @@ namespace Comdat.DOZP.OCR
         public LoginDialog()
         {
             InitializeComponent();
-
-#if DEBUG
-            this.UserNameTextBox.Text = "admin";
-            this.PasswordTextBox.Password = "comdat2389";
-#endif
         }
 
         #endregion
