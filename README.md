@@ -1,6 +1,6 @@
-# DOZP - Projekt Digitalizácie a OCR Spracovania Publikácií UK FF
+# DOZP
 
-**Projekt retrokonverzie katalógov knižnice Univerzity Komenského v Bratislave**
+**Projekt digitalizácie a OCR spracovania publikácií UK FF Praha (rok 2015)**
 
 Komplexný systém pre digitalizáciu a OCR spracovanie publikácií, obálok a obsahov kníh z knižničného fondu. Projekt bol vytvorený v roku 2015 ako súčasť iniciatívy na zachovávanie a sprístupnenie historických a knižničných zbierok.
 
@@ -51,20 +51,20 @@ Systém DOZP nasleduje **vrstvovú architektúru (N-tier)** s jasným oddelením
 │  - Webové rozhranie, autentifikácia, štatistiky     │
 └────────────────┬────────────────────────────────────┘
                  │
-┌─────────────────┴────────────────────────────────────┐
-│         Servisná vrstva                              │
-│  - Comdat.DOZP.Service (WCF Services)                │
-│  - Business logic, spracovanie dát                   │
-│  - Comdat.DOZP.Process (Controllers)                 │
+┌─────────────────┴───────────────────────────────────┐
+│         Servisná vrstva                             │
+│  - Comdat.DOZP.Service (WCF Services)               │
+│  - Business logic, spracovanie dát                  │
+│  - Comdat.DOZP.Process (Controllers)                │
 └────────────────┬────────────────────────────────────┘
                  │
-┌─────────────────┴────────────────────────────────────┐
-│         Vrstva Aplikačnej logiky                     │
-│  - Comdat.DOZP.Core (Business entities & logic)      │
-│  - Comdat.DOZP.OCR (OCR processing)                  │
-│  - Comdat.DOZP.Scan (Scanning management)            │
-│  - Comdat.DOZP.App (Desktop App - XAML)              │
-│  - Comdat.DOZP.Agent (Background Processing)         │
+┌─────────────────┴───────────────────────────────────┐
+│         Vrstva Aplikačnej logiky                    │
+│  - Comdat.DOZP.Core (Business entities & logic)     │
+│  - Comdat.DOZP.OCR (OCR processing)                 │
+│  - Comdat.DOZP.Scan (Scanning management)           │
+│  - Comdat.DOZP.App (Desktop App - XAML)             │
+│  - Comdat.DOZP.Agent (Background Processing)        │
 └────────────────┬────────────────────────────────────┘
                  │
 ┌─────────────────┴────────────────────────────────────┐
@@ -80,14 +80,14 @@ Systém DOZP nasleduje **vrstvovú architektúru (N-tier)** s jasným oddelením
 ```
 Skeňovanie                OCR Spracovanie              Web Prístup
 ┌────────────┐           ┌──────────────┐            ┌──────────────┐
-│ Skener     │──────────▶│ OCR Engine   │──────────▶ │ Web Portal   │
+│ Skener     │─────────▶│ OCR Engine    │─────────▶ │ Web Portal   │
 │ (Hardvér)  │           │ (Tesseract?) │            │ (ASP.NET)    │
 └────────────┘           └──────────────┘            └──────────────┘
        │                       │                           │
        └───────────────────────┼───────────────────────────┘
                                │
                     ┌──────────▼──────────┐
-                    │   Databáza         │
+                    │   Databáza          │
                     │ (SQL Server)        │
                     └─────────────────────┘
 ```
@@ -129,7 +129,7 @@ DOZP/
 ├── Comdat.DOZP.Core/               # Jadro aplikácie (Business Logic)
 │   ├── App.cs                      # Aplikačné konfigurácie
 │   ├── Extensions.cs               # Rozšírenia a helper metódy
-│   ├── Comdat.DOZP.Core.csproj    # Project file
+│   ├── Comdat.DOZP.Core.csproj     # Project file
 │   ├── packages.config             # NuGet závislosti
 │   ├── Config/                     # Konfigurčné entity
 │   ├── Criteria/                   # Kritéria pre vyhľadávanie
@@ -145,7 +145,7 @@ DOZP/
 ├── Comdat.DOZP.Data/               # Dátová vrstva (ORM, Repository)
 │   ├── Extensions.cs               # LINQ extensions
 │   ├── App.config                  # Database configuration
-│   ├── Comdat.DOZP.Data.csproj    # Project file
+│   ├── Comdat.DOZP.Data.csproj     # Project file
 │   ├── packages.config             # NuGet dependencies
 │   ├── Business/                   # Business objekty
 │   ├── Mapping/                    # ORM mapovanie (Entity mappings)
@@ -157,8 +157,8 @@ DOZP/
 │   ├── MainWindow.xaml.cs          # OCR code-behind
 │   ├── App.xaml                    # Application resources
 │   ├── App.xaml.cs                 # Application startup
-│   ├── Comdat.DOZP.OCR.csproj     # Project file
-│   ├── Comdat.DOZP.OCR.ico        # OCR ikona
+│   ├── Comdat.DOZP.OCR.csproj      # Project file
+│   ├── Comdat.DOZP.OCR.ico         # OCR ikona
 │   ├── app.config                  # App configuration
 │   ├── packages.config             # NuGet dependencies
 │   ├── Dialogs/                    # OCR dialógové okná
@@ -180,8 +180,8 @@ DOZP/
 │   ├── MainWindow.xaml.cs          # Skenovanie code-behind
 │   ├── App.xaml                    # Application resources
 │   ├── App.xaml.cs                 # Application startup
-│   ├── Comdat.DOZP.Scan.csproj    # Project file
-│   ├── Comdat.DOZP.Scan.ico       # Skenovacia ikona
+│   ├── Comdat.DOZP.Scan.csproj     # Project file
+│   ├── Comdat.DOZP.Scan.ico        # Skenovacia ikona
 │   ├── app.config                  # App configuration
 │   ├── packages.config             # NuGet dependencies
 │   ├── Controls/                   # Skenovacie kontroly
@@ -211,7 +211,7 @@ DOZP/
 │   ├── Service.svc                 # WCF Service endpoint
 │   ├── Global.asax                 # Aplikačné eventy
 │   ├── Web.config                  # Konfigurácia
-│   ├── Comdat.DOZP.Web.csproj     # Project file
+│   ├── Comdat.DOZP.Web.csproj      # Project file
 │   ├── packages.config             # NuGet dependencies
 │   ├── Account/                    # Správa účtov
 │   ├── Admin/                      # Admin panel
@@ -449,5 +449,3 @@ msbuild Comdat.DOZP.sln /p:Configuration=Release
 **Posledná aktualizácia:** Jún 2026
 
 *Táto dokumentácia poskytuje komplexný prehľad projektu DOZP, jeho architektúry, komponentov a inštrukcií na inštaláciu a použitie.*
-
-**© UK FF Praha**
